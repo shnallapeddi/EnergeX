@@ -86,7 +86,6 @@ After login, it calls GET /api/posts to show the list.
 Provides a simple create post form that submits to POST /api/posts (title, content).
 Status & UX: success/error banners, disabled/hidden sections when not authenticated, centered clean layout.
 Proxy/wiring: Vite dev server proxies /api/* to the Lumen backend on :8000, so the frontend calls /api/... without CORS issues.
-For cache testing you can switch the list call to http://localhost:4000/cache/posts to hit the Node Redis layer directly.
 
 ### File Paths
 | Section (task)                 | Path(s)                                                                                               | What it contains                                                                                                 |
