@@ -44,14 +44,14 @@ The PHP API focuses on auth and writes. Reads can go through the cache service b
 
 #### Backend Implementation
 ##### (Lumen – PHP)
-A Lumen microservice that exposes a small REST API for authentication and posts.
-JWT auth: /api/login issues a signed token; protected routes use a JWT middleware.
-User registration: /api/register validates input and stores a bcrypt-hashed password in MySQL.
-Posts CRUD (create + read):
+1. A Lumen microservice that exposes a small REST API for authentication and posts.
+2. JWT auth: /api/login issues a signed token; protected routes use a JWT middleware.
+3. User registration: /api/register validates input and stores a bcrypt-hashed password in MySQL.
+4. Posts CRUD (create + read):
 POST /api/posts creates a post for the authenticated user.
 GET /api/posts and GET /api/posts/{id} first check Redis (keys posts:all and posts:{id}) and fall back to MySQL on a miss; results are cached with a TTL.
-Proper HTTP status codes and JSON error messages throughout; simple cache warm/refresh on create.
-A Postman collection is included to exercise register, login, and posts endpoints.
+5. Proper HTTP status codes and JSON error messages throughout; simple cache warm/refresh on create.
+6. A Postman collection is included to exercise register, login, and posts endpoints.
 
 ##### Backend (Node.js – TypeScript)
 This section is the Node.js (TypeScript) cache service we built to sit in front of MySQL and speed up reads:
