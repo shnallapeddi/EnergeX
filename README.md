@@ -1,7 +1,7 @@
-#### Objective
+### Objective
 Build a microservice API using Lumen (PHP) and Node.js (TypeScript) that integrates with Redis for caching, a MySQL database, and a simple frontend (React.js or Vue.js) to consume the API.
 
-### Breakdown of the tasks performed
+#### Breakdown of the tasks performed
 
 | Section                    | Task                                                                 |
 |---------------------------|----------------------------------------------------------------------|
