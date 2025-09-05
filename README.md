@@ -18,16 +18,40 @@ Build a microservice API using Lumen (PHP) and Node.js (TypeScript) that integra
 | CI/CD                     | Set up GitHub Actions/GitLab CI to automate testing                  |
 
 #### Architecture
-React (Vite)  ─────→  Lumen API (PHP) ─────→ MySQL
-                     ↑             ↓
-                   JWT            Create Post
-                     │
-Node Cache (TS)  ←── Redis  ←──── Read Posts (Redis HIT/MISS, fallback to MySQL)
+```mermaid
+flowchart LR
+  FE[React (Vite)] -->|/api/* (Register/Login/Create)| API[Lumen API (PHP)]
+  API -->|Writes/Reads| DB[(MySQL)]
+
+  FE -->|/cache/* (Read posts)| NC[Node Cache (TypeScript)]
+  NC -->|HIT/MISS| R[(Redis)]
+  NC -->|MISS → Query| DB
+
+  %% extras (dashed helper edges)
+  API -.->|may read via cache endpoints| NC
+
 
 The Lumen API owns authentication and post creation.
 The Node cache serves reads for posts via Redis; on a MISS it queries MySQL, then caches the result.
 
+#### Endpoints
+##### Lumen (PHP) API
+| Method | Endpoint          | Auth | Description                           |
+| -----: | ----------------- | :--: | ------------------------------------- |
+|   POST | `/api/register`   |   –  | Register user (name, email, password) |
+|   POST | `/api/login`      |   –  | Login and receive a JWT               |
+|    GET | `/api/posts`      |  JWT | List posts (served via cache layer)   |
+|   POST | `/api/posts`      |  JWT | Create a post (title, content)        |
+|    GET | `/api/posts/{id}` |  JWT | Get one post (served via cache layer) |
 
+The PHP API focuses on auth and writes. Reads can go through the cache service below.
+
+##### Node.js (TypeScript) Cache API
+| Method | Endpoint           | Description                                    |
+| -----: | ------------------ | ---------------------------------------------- |
+|    GET | `/health`          | Health check                                   |
+|    GET | `/cache/posts`     | Posts from Redis; on MISS, query DB then cache |
+|    GET | `/cache/posts/:id` | One post from Redis; on MISS, query then cache |
 
 ### File Paths
 
@@ -41,7 +65,6 @@ The Node cache serves reads for posts via Redis; on a MISS it queries MySQL, the
 | **Testing (Jest – Node cache)**| `node-cache/tests/**`                                                                                  | Cache API tests (`cache.spec.ts`)                                                                               |
 | **DevOps (Docker)**            | `docker-compose.yml`                                                                                   | Orchestrates PHP (Lumen), Node cache, MySQL, and Redis containers (with ports/healthchecks/volumes)             |
 | **Postman collection**         | `Screening Test – EnergeX – Backend.postman_collection.json`                                           | Ready-to-import Postman requests for Register/Login/Posts                                                        |
-
 
 ### Repository tree
 
