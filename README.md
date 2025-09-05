@@ -18,19 +18,11 @@ Build a microservice API using Lumen (PHP) and Node.js (TypeScript) that integra
 | CI/CD                     | Set up GitHub Actions/GitLab CI to automate testing                  |
 
 #### Architecture
-  FE[React (Vite)] -->|/api/register, /api/login| API[Lumen API (PHP)]
-  API -->|Issue / verify JWT| FE
-  FE -->|/api/posts (create)| API
-  API -->|INSERT / SELECT| DB[(MySQL)]
-
-  FE -->|/cache/posts, /cache/posts/:id (read)| NC[Node Cache (TypeScript)]
-  NC <--> |GET / SET| R[(Redis)]
-  NC -->|HIT: return cached| FE
-  NC -->|MISS: query| DB
-  DB -->|rows| NC
-  NC -->|cache + return| FE
-
-
+React (Vite)  ─────→  Lumen API (PHP) ─────→ MySQL
+                     ↑             ↓
+                   JWT            Create Post
+                     │
+Node Cache (TS)  ←── Redis  ←──── Read Posts (Redis HIT/MISS, fallback to MySQL)
 
 The Lumen API owns authentication and post creation.
 The Node cache serves reads for posts via Redis; on a MISS it queries MySQL, then caches the result.
