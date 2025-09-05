@@ -67,7 +67,10 @@ jobs:
           REDIS_PORT=6379
           JWT_SECRET=e2e4348f898a12dc1783b05aadd7430a6665f81683dc2d33c2be90a5f550c7e5
           ENV
-
+      - name: Activate test env for Lumen
+        run: cp .env.testing .env
+        working-directory: php-api
+    
       - name: Wait for MySQL
         run: |
           for i in {1..60}; do
