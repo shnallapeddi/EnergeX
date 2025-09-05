@@ -54,34 +54,33 @@ GET /api/posts and GET /api/posts/{id} first check Redis (keys posts:all and pos
 6. A Postman collection is included to exercise register, login, and posts endpoints.
 
 ##### Backend (Node.js – TypeScript)
-This section is the Node.js (TypeScript) cache service we built to sit in front of MySQL and speed up reads:
-A small Express app that connects to Redis and MySQL (mysql2/promise).
-Endpoints:
-GET /cache/posts – returns the list of posts.
-Looks up key posts:all in Redis → HIT: return cached JSON (sets X-Cache: HIT).
-MISS: reads rows from MySQL, stores them in Redis with a TTL, returns JSON (sets X-Cache: MISS).
-GET /cache/posts/:id – returns a single post.
-Checks posts:{id} in Redis first; on miss, queries MySQL, caches the row, then returns it.
+1. This section is the Node.js (TypeScript) cache service we built to sit in front of MySQL and speed up reads:
+2. A small Express app that connects to Redis and MySQL (mysql2/promise).
+3. Endpoints:
+   1. GET /cache/posts – returns the list of posts.
+   2. Looks up key posts:all in Redis → HIT: return cached JSON (sets X-Cache: HIT).
+   3. MISS: reads rows from MySQL, stores them in Redis with a TTL, returns JSON (sets X-Cache: MISS).
+   4. GET /cache/posts/:id – returns a single post.
+   5. Checks posts:{id} in Redis first; on miss, queries MySQL, caches the row, then returns it.
 
 ##### Database
-Schema: We created a MySQL database with two tables:
-users (id, name, email UNIQUE, password, created_at, updated_at)
-posts (id, title, content, user_id FK → users.id, created_at, updated_at, index on user_id, ON DELETE SET NULL)
-Bootstrap scripts: The repo contains container-init SQL:
-mysql/init/01-schema.sql — creates the tables with utf8mb4 + InnoDB and the FK.
-mysql/init/02-seed.sql — inserts a sample user and post so the app can start with data.
-Passwords: When a user registers through the Lumen API, the password is hashed (bcrypt) before being stored.
-Consumers: Both backends use this DB:
-Lumen performs CRUD and issues JWTs.
-The Node cache reads posts (and writes them into Redis on a cache miss).
-Docker: MySQL is run via Docker Compose with health checks; credentials and DB name are provided through env vars used by Lumen and the Node cache.
+1. Schema: We created a MySQL database with two tables:
+   1. users (id, name, email UNIQUE, password, created_at, updated_at)
+   2. posts (id, title, content, user_id FK → users.id, created_at, updated_at, index on user_id, ON DELETE SET NULL)
+2. Bootstrap scripts: The repo contains container-init SQL:
+   1. mysql/init/01-schema.sql — creates the tables with utf8mb4 + InnoDB and the FK.
+   2. mysql/init/02-seed.sql — inserts a sample user and post so the app can start with data.
+3. Passwords: When a user registers through the Lumen API, the password is hashed (bcrypt) before being stored.
+4. Lumen performs CRUD and issues JWTs.
+5. The Node cache reads posts (and writes them into Redis on a cache miss).
+6. Docker: MySQL is run via Docker Compose with health checks; credentials and DB name are provided through env vars used by Lumen and the Node cache.
 
 ##### Frontend
-Stack: React (Vite + TypeScript). One-page app in src/App.tsx with a tiny Axios wrapper in src/lib/api.ts.
-Auth flows:
-Register form posts to POST /api/register (name, email, password).
-Login form posts to POST /api/login; the returned JWT is kept in state (and sent on subsequent calls via Authorization: Bearer <token>).
-Posts UI:
+1. Stack: React (Vite + TypeScript). One-page app in src/App.tsx with a tiny Axios wrapper in src/lib/api.ts.
+2. Auth flows:
+  1. Register form posts to POST /api/register (name, email, password).
+  2. Login form posts to POST /api/login; the returned JWT is kept in state (and sent on subsequent calls via Authorization: Bearer <token>).
+3. Posts UI:
 After login, it calls GET /api/posts to show the list.
 Provides a simple create post form that submits to POST /api/posts (title, content).
 Status & UX: success/error banners, disabled/hidden sections when not authenticated, centered clean layout.
