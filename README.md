@@ -81,10 +81,10 @@ GET /api/posts and GET /api/posts/{id} first check Redis (keys posts:all and pos
   1. Register form posts to POST /api/register (name, email, password).
   2. Login form posts to POST /api/login; the returned JWT is kept in state (and sent on subsequent calls via Authorization: Bearer <token>).
 3. Posts UI:
-After login, it calls GET /api/posts to show the list.
-Provides a simple create post form that submits to POST /api/posts (title, content).
-Status & UX: success/error banners, disabled/hidden sections when not authenticated, centered clean layout.
-Proxy/wiring: Vite dev server proxies /api/* to the Lumen backend on :8000, so the frontend calls /api/... without CORS issues.
+  1. After login, it calls GET /api/posts to show the list.
+  2. Provides a simple create post form that submits to POST /api/posts (title, content).
+4. Status & UX: success/error banners, disabled/hidden sections when not authenticated, centered clean layout.
+5. Proxy/wiring: Vite dev server proxies /api/* to the Lumen backend on :8000, so the frontend calls /api/... without CORS issues.
 
 ### File Paths
 | Section (task)                 | Path(s)                                                                                               | What it contains                                                                                                 |
