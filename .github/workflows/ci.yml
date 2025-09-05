@@ -1,0 +1,123 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: energex_test
+          MYSQL_USER: energex_user
+          MYSQL_PASSWORD: EnergeX!Local123
+          MYSQL_ROOT_PASSWORD: root
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=10s --health-timeout=5s --health-retries=30
+
+      redis:
+        image: redis:7-alpine
+        ports: ['6379:6379']
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval=5s --health-timeout=5s --health-retries=30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ---------- PHP / Lumen ----------
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo_mysql
+          coverage: none
+
+      - name: Cache composer
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache/files
+          key: composer-${{ runner.os }}-${{ hashFiles('php-api/composer.lock') }}
+          restore-keys: composer-${{ runner.os }}-
+
+      - name: Install composer deps (php-api)
+        run: composer install --no-interaction --no-progress --prefer-dist
+        working-directory: php-api
+
+      - name: Create php-api .env.testing
+        run: |
+          cat > php-api/.env.testing <<'ENV'
+          APP_ENV=testing
+          APP_DEBUG=true
+          DB_CONNECTION=mysql
+          DB_HOST=127.0.0.1
+          DB_PORT=3306
+          DB_DATABASE=energex_test
+          DB_USERNAME=energex_user
+          DB_PASSWORD=EnergeX!Local123
+          CACHE_DRIVER=array
+          REDIS_HOST=127.0.0.1
+          REDIS_PORT=6379
+          JWT_SECRET=e2e4348f898a12dc1783b05aadd7430a6665f81683dc2d33c2be90a5f550c7e5
+          ENV
+
+      - name: Wait for MySQL
+        run: |
+          for i in {1..60}; do
+            mysqladmin ping -h 127.0.0.1 -uroot -proot && break
+            sleep 2
+          done
+
+      - name: Load schema & seed
+        run: |
+          mysql -h 127.0.0.1 -uroot -proot energex_test < mysql/init/01-schema.sql
+          mysql -h 127.0.0.1 -uroot -proot energex_test < mysql/init/02-seed.sql
+
+      - name: Run PHPUnit
+        run: ./vendor/bin/phpunit --configuration phpunit.xml
+        working-directory: php-api
+
+      # ---------- Node cache (Jest) ----------
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Cache npm (node-cache)
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-${{ runner.os }}-${{ hashFiles('node-cache/package-lock.json') }}
+          restore-keys: npm-${{ runner.os }}-
+
+      - name: npm ci (node-cache)
+        run: npm ci
+        working-directory: node-cache
+
+      - name: Run Jest (node-cache)
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: '3306'
+          DB_NAME: energex_test
+          DB_USER: energex_user
+          DB_PASS: EnergeX!Local123
+          REDIS_HOST: 127.0.0.1
+          REDIS_PORT: '6379'
+          NODE_ENV: test
+        run: npm test -- --runInBand
+        working-directory: node-cache
+
+      # ---------- Frontend (Vite) ----------
+      - name: npm ci (frontend)
+        run: npm ci
+
+      - name: Build frontend
+        run: npm run build
+

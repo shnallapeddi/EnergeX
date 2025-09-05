@@ -1,0 +1,116 @@
+/* reset + variables */
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: #0f172a; /* slate-900 */
+  background:
+    radial-gradient(1200px 500px at 50% -200px, rgba(14,165,233,.10), transparent 60%),
+    linear-gradient(180deg, #f8fafc 0%, #ffffff 100%); /* super subtle */
+}
+
+/* page layout */
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* header */
+.header {
+  padding: 32px 16px 8px;
+  text-align: center;
+}
+.header h1 {
+  margin: 0 0 6px;
+  font-size: clamp(28px, 3.6vw, 44px);
+  letter-spacing: .2px;
+}
+.header p {
+  margin: 0;
+  opacity: .7;
+}
+
+/* centered content area */
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;   /* centers vertically */
+  padding: 24px 16px 40px;
+}
+
+/* grid of cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 360px));
+  gap: 24px;
+  align-items: start;
+}
+
+/* card look */
+.card {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e5e7eb; /* gray-200 */
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 22px rgba(2, 6, 23, .04);
+}
+.card h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+/* inputs + buttons */
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 8px 0 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+.input:focus {
+  border-color: #38bdf8;               /* sky-400 */
+  box-shadow: 0 0 0 4px rgba(56,189,248,.15);
+}
+
+.button {
+  appearance: none;
+  border: 0;
+  background: #0ea5e9;                 /* sky-500 */
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background .15s, transform .02s, box-shadow .15s;
+  box-shadow: 0 6px 16px rgba(14,165,233,.25);
+}
+.button:hover { background: #0284c7; }  /* sky-600 */
+.button:active { transform: translateY(1px); }
+
+/* status messages */
+.status { margin-top: 8px; font-weight: 600; text-align: center; }
+.status.success { color: #16a34a; }      /* green-600 */
+.status.error   { color: #dc2626; }      /* red-600 */
+
+/* posts card */
+.posts {
+  margin-top: 28px;
+  max-width: 760px;
+  width: 100%;
+}
+.post {
+  padding: 12px 0;
+  border-top: 1px solid #e5e7eb;
+}
+.post:first-child { border-top: none; }
+.post-title { font-weight: 600; }
+.post-meta  { color: #6b7280; font-size: 12px; }
+

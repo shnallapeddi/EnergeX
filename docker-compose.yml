@@ -1,0 +1,56 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: energex-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: energex_test
+      MYSQL_USER: energex_user
+      MYSQL_PASSWORD: EnergeX!Local123
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD","mysqladmin","ping","-h","127.0.0.1","-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    container_name: energex-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD","redis-cli","ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  php-api:
+    build:
+      context: ./php-api
+    container_name: energex-php
+    env_file:
+      - ./php-api/.env.docker
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  node-cache:
+    build:
+      context: ./node-cache
+    container_name: energex-cache
+    env_file:
+      - ./node-cache/.env.docker
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "4000:4000"
+

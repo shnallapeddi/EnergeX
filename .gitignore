@@ -1,0 +1,6 @@
+node_modules/
+vendor/
+.env*
+php-api/.env*
+node-cache/.env*
+dist/
