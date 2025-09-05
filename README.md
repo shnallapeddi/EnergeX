@@ -14,6 +14,18 @@ Build a microservice API using Lumen (PHP) and Node.js (TypeScript) that integra
 6. DevOps (Docker)	Containerize the application using Docker
 7. CI/CD	Set up GitHub Actions/GitLab CI to automate testing
 
+### File Paths
+| Section (task)             | Path(s)                                                      | What it contains                                                                 |
+| -------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| **Backend (Lumen – PHP)**  | `php-api/` - Backend (Lumen – PHP) 1.txt, Backend (Lumen – PHP) 2.txt, EnergeX.sql                                                 | Lumen code (routes, controllers, models), `.env*`, `phpunit.xml`, **Dockerfile** |
+| **Backend (Node.js – TS)** | `node-cache/` - Backend (Node.js – TypeScript) - 1.txt, Backend (Node.js – TypeScript)-2.txt                                               | Express + Redis cache service (TypeScript), Jest tests, **Dockerfile**           |
+| **Database (MySQL)**       | `mysql/init/01-schema.sql`, `mysql/init/02-seed.sql` - Database (MySQL).txt        | Schema + seed that init the DB in Docker                                         |
+| **Frontend (React/Vite)**  | `src/`, `index.html`, `vite.config.ts` -                       | Minimal UI to register/login/create posts and view the list                      |
+| **Testing**                | `php-api/tests/**` (PHPUnit), `node-cache/tests/**` (Jest) - Lumen (PHP) tests with PHPUnit.txt, Node cache API tests.txt  | Unit tests for both backends                                                     |
+| **DevOps (Docker)**        | `docker-compose.yml`   - DevOps (Docker).txt                                      | Orchestrates PHP, Node cache, MySQL, Redis                                       |
+| **Postman collection**     | `Screening Test - EnergeX - Backend.postman_collection.json` | Ready-to-import requests for Register/Login/Posts                                |
+
+
 ### Repository tree
 
 ```text
@@ -34,7 +46,7 @@ Build a microservice API using Lumen (PHP) and Node.js (TypeScript) that integra
 ├─ php-api/
 │  ├─ Dockerfile
 │  ├─ .env.docker
-│  ├─ app/        # Lumen application code
+│  ├─ app/       
 │  ├─ routes/
 │  ├─ public/
 │  └─ tests/
@@ -42,21 +54,6 @@ Build a microservice API using Lumen (PHP) and Node.js (TypeScript) that integra
 │     └─ Feature/
 │        ├─ AuthTest.php
 │        └─ PostsTest.php
-├─ src/           # React (Vite) frontend
+├─ src/          
 └─ Screening Test - EnergeX - Backend.postman_collection.json
-
-
-
-### File Paths
-| Section (task)             | Path(s)                                                      | What it contains                                                                 |
-| -------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------- |
-| **Backend (Lumen – PHP)**  | `php-api/` - Backend (Lumen – PHP) 1.txt, Backend (Lumen – PHP) 2.txt, EnergeX.sql                                                 | Lumen code (routes, controllers, models), `.env*`, `phpunit.xml`, **Dockerfile** |
-| **Backend (Node.js – TS)** | `node-cache/` - Backend (Node.js – TypeScript) - 1.txt, Backend (Node.js – TypeScript)-2.txt                                               | Express + Redis cache service (TypeScript), Jest tests, **Dockerfile**           |
-| **Database (MySQL)**       | `mysql/init/01-schema.sql`, `mysql/init/02-seed.sql` - Database (MySQL).txt        | Schema + seed that init the DB in Docker                                         |
-| **Frontend (React/Vite)**  | `src/`, `index.html`, `vite.config.ts` -                       | Minimal UI to register/login/create posts and view the list                      |
-| **Testing**                | `php-api/tests/**` (PHPUnit), `node-cache/tests/**` (Jest) - Lumen (PHP) tests with PHPUnit.txt, Node cache API tests.txt  | Unit tests for both backends                                                     |
-| **DevOps (Docker)**        | `docker-compose.yml`   - DevOps (Docker).txt                                      | Orchestrates PHP, Node cache, MySQL, Redis                                       |
-| **Postman collection**     | `Screening Test - EnergeX - Backend.postman_collection.json` | Ready-to-import requests for Register/Login/Posts                                |
-
-
 
