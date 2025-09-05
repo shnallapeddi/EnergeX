@@ -1,0 +1,62 @@
+Last login: Thu Sep  4 19:21:44 on ttys005
+eval "$(/opt/homebrew/bin/brew shellenv)"
+(base) sharanya@Sharanyas-MacBook-Air ~ % mkdir -p ~/code/energex && cd ~/code/energex
+(base) sharanya@Sharanyas-MacBook-Air energex % cd ~/energex/node-cache
+(base) sharanya@Sharanyas-MacBook-Air node-cache % npm i -D jest ts-jest @types/jest supertest @types/supertest
+
+added 306 packages, and audited 466 packages in 10s
+
+73 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+(base) sharanya@Sharanyas-MacBook-Air node-cache % npx ts-jest config:init
+
+Jest configuration written to "/Users/sharanya/energex/node-cache/jest.config.js".
+(base) sharanya@Sharanyas-MacBook-Air node-cache % nano src/server.ts
+(base) sharanya@Sharanyas-MacBook-Air node-cache % mkdir -p tests
+(base) sharanya@Sharanyas-MacBook-Air node-cache % nano tests/cache.spec.ts
+(base) sharanya@Sharanyas-MacBook-Air node-cache % nano package.json
+(base) sharanya@Sharanyas-MacBook-Air node-cache % npm test
+
+> cache@1.0.0 test
+> jest --runInBand
+
+ FAIL  tests/cache.spec.ts
+  ● Test suite failed to run
+
+    tests/cache.spec.ts:2:8 - error TS1192: Module '"/Users/sharanya/energex/node-cache/src/server"' has no default export.
+
+    2 import app from '../src/server';
+             ~~~
+
+Test Suites: 1 failed, 1 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        1.473 s
+Ran all test suites.
+(base) sharanya@Sharanyas-MacBook-Air node-cache % nano src/server.ts
+(base) sharanya@Sharanyas-MacBook-Air node-cache % nano package.json
+(base) sharanya@Sharanyas-MacBook-Air node-cache % nano package.json
+(base) sharanya@Sharanyas-MacBook-Air node-cache % nano tests/cache.spec.ts
+(base) sharanya@Sharanyas-MacBook-Air node-cache % nano src/db.ts
+(base) sharanya@Sharanyas-MacBook-Air node-cache % npm test
+
+> cache@1.0.0 test
+> NODE_ENV=test jest --runInBand
+
+ PASS  tests/cache.spec.ts
+  cache api
+    ✓ GET /health (15 ms)
+    ✓ GET /cache/posts MISS then cache (3 ms)
+    ✓ GET /cache/posts HIT (3 ms)
+    ✓ GET /cache/posts/:id invalid (2 ms)
+    ✓ GET /cache/posts/:id MISS then cache (2 ms)
+    ✓ GET /cache/posts/:id HIT (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       6 passed, 6 total
+Snapshots:   0 total
+Time:        1.723 s
+Ran all test suites.
+(base) sharanya@Sharanyas-MacBook-Air node-cache % 

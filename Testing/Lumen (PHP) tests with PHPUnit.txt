@@ -1,0 +1,183 @@
+Last login: Thu Sep  4 19:18:43 on ttys007
+eval "$(/opt/homebrew/bin/brew shellenv)"
+(base) sharanya@Sharanyas-MacBook-Air ~ %  mkdir -p ~/code/energex && cd ~/code/energex 
+(base) sharanya@Sharanyas-MacBook-Air energex % cd ~/code/energex/php-api
+(base) sharanya@Sharanyas-MacBook-Air php-api % cp -n .env .env.testing
+(base) sharanya@Sharanyas-MacBook-Air php-api % nano .env.testing
+(base) sharanya@Sharanyas-MacBook-Air php-api % mkdir -p tests/Feature
+(base) sharanya@Sharanyas-MacBook-Air php-api % nano tests/TestCase.php
+(base) sharanya@Sharanyas-MacBook-Air php-api % nano tests/Feature/AuthTest.php
+(base) sharanya@Sharanyas-MacBook-Air php-api % nano tests/Feature/PostsTest.php
+(base) sharanya@Sharanyas-MacBook-Air php-api % nano phpunit.xml
+(base) sharanya@Sharanyas-MacBook-Air php-api % nano ~/code/energex/php-api/tests/ExampleTest.php
+(base) sharanya@Sharanyas-MacBook-Air php-api % ./vendor/bin/phpunit --configuration phpunit.xml
+PHPUnit 10.5.53 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.4.12
+Configuration: /Users/sharanya/code/energex/php-api/phpunit.xml
+
+.......                                                             7 / 7 (100%)
+
+Time: 00:05.459, Memory: 32.00 MB
+
+OK (7 tests, 23 assertions)
+(base) sharanya@Sharanyas-MacBook-Air php-api % cat TestCase.php
+cat > tests/TestCase.php <<'PHP'
+<?php
+use Laravel\Lumen\Testing\TestCase as BaseTestCase;
+
+abstract class TestCase extends BaseTestCase
+{
+    public function createApplication()
+    {
+        return require __DIR__ . '/../bootstrap/app.php';
+    }
+}
+PHP
+
+(base) sharanya@Sharanyas-MacBook-Air php-api % cat tests/Feature/AuthTest.php
+<?php
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
+class AuthTest extends TestCase
+{
+    public function test_register_creates_user_and_returns_201(): void
+    {
+        $email = 'user' . uniqid() . '@example.com';
+
+        $this->post('/api/register', [
+            'name' => 'Test User',
+            'email' => $email,
+            'password' => 'secret123',
+        ]);
+
+        $this->seeStatusCode(201);
+        $this->seeJsonStructure(['message', 'user' => ['id', 'name', 'email']]);
+        $this->seeInDatabase('users', ['email' => $email]);
+    }
+
+    public function test_login_returns_token_on_valid_credentials(): void
+    {
+        $user = User::create([
+            'name' => 'Login User',
+            'email' => 'login@example.com',
+            'password' => Hash::make('secret123'),
+        ]);
+
+        $this->post('/api/login', [
+            'email' => $user->email,
+            'password' => 'secret123',
+        ]);
+
+        $this->seeStatusCode(200);
+        $this->seeJsonStructure(['token']);
+        $json = json_decode($this->response->getContent(), true);
+        $this->assertNotEmpty($json['token']);
+    }
+
+    public function test_login_fails_on_bad_password(): void
+    {
+        $user = User::create([
+            'name' => 'Bad Pass',
+            'email' => 'badpass@example.com',
+            'password' => Hash::make('secret123'),
+        ]);
+
+        $this->post('/api/login', [
+            'email' => $user->email,
+            'password' => 'wrongpass',
+        ]);
+
+        $this->seeStatusCode(401);
+    }
+}
+
+(base) sharanya@Sharanyas-MacBook-Air php-api % cat ests/Feature/PostsTest.php
+cat: ests/Feature/PostsTest.php: No such file or directory
+(base) sharanya@Sharanyas-MacBook-Air php-api % cat tests/Feature/PostsTest.php
+<?php
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
+class PostsTest extends TestCase
+{
+    protected string $token;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $user = User::create([
+            'name' => 'Poster',
+            'email' => 'poster@example.com',
+            'password' => Hash::make('secret123'),
+        ]);
+
+        $this->post('/api/login', [
+            'email' => $user->email,
+            'password' => 'secret123',
+        ]);
+
+        $json = json_decode($this->response->getContent(), true);
+        $this->token = $json['token'];
+        $this->assertNotEmpty($this->token);
+    }
+
+    public function test_list_posts_requires_auth(): void
+    {
+        $this->get('/api/posts');
+        $this->seeStatusCode(401);
+    }
+
+    public function test_create_and_fetch_posts(): void
+    {
+        $this->post('/api/posts', [
+            'title' => 'Hello From Test',
+            'content' => 'Content body',
+        ], [
+            'Authorization' => 'Bearer ' . $this->token,
+        ]);
+
+        $this->seeStatusCode(201);
+        $this->seeInDatabase('posts', ['title' => 'Hello From Test']);
+
+        $this->get('/api/posts', [
+            'Authorization' => 'Bearer ' . $this->token,
+        ]);
+
+        $this->seeStatusCode(200);
+        $this->seeJsonContains(['title' => 'Hello From Test']);
+    }
+
+    public function test_get_single_post(): void
+    {
+        $this->post('/api/posts', [
+            'title' => 'One',
+            'content' => 'Only',
+        ], [
+            'Authorization' => 'Bearer ' . $this->token,
+        ]);
+
+        $created = json_decode($this->response->getContent(), true);
+        $id = $created['id'] ?? null;
+        $this->assertNotNull($id);
+
+        $this->get('/api/posts/' . $id, [
+            'Authorization' => 'Bearer ' . $this->token,
+        ]);
+
+        $this->seeStatusCode(200);
+        $this->seeJsonContains(['id' => $id]);
+    }
+}
+
+(base) sharanya@Sharanyas-MacBook-Air php-api % 
