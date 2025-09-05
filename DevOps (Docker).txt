@@ -1,0 +1,331 @@
+Last login: Thu Sep  4 22:07:28 on ttys005
+eval "$(/opt/homebrew/bin/brew shellenv)"
+(base) sharanya@Mac ~ % mkdir -p ~/code/energex
+(base) sharanya@Mac ~ % cd ~/code/energex
+(base) sharanya@Mac energex % cd ~/code/energex
+(base) sharanya@Mac energex % cd ~/code/energex/php-api
+(base) sharanya@Mac php-api % ls
+app		composer.lock	phpunit.xml	routes		vendor
+artisan		config		public		storage
+bootstrap	database	README.md	TestCase.php
+composer.json	Dockerfile	resources	tests
+(base) sharanya@Mac php-api % nano Dockerfile
+(base) sharanya@Mac php-api % cd ..
+(base) sharanya@Mac energex % cd ~/code/energex/node-cache           
+cd: no such file or directory: /Users/sharanya/code/energex/node-cache
+(base) sharanya@Mac energex % ls
+docker-compose.yml	package-lock.json	src
+eslint.config.js	package.json		tsconfig.app.json
+index.html		php-api			tsconfig.json
+mysql			public			tsconfig.node.json
+node_modules		README.md		vite.config.ts
+(base) sharanya@Mac energex % nano docker-composer.yml
+(base) sharanya@Mac energex % cd ..
+(base) sharanya@Mac code % cd ..
+(base) sharanya@Mac ~ % mkdir -p ~/code/energex
+(base) sharanya@Mac ~ % cd ~/code/energex
+(base) sharanya@Mac energex % ls
+docker-compose.yml	package-lock.json	src
+eslint.config.js	package.json		tsconfig.app.json
+index.html		php-api			tsconfig.json
+mysql			public			tsconfig.node.json
+node_modules		README.md		vite.config.ts
+(base) sharanya@Mac energex % cd ..
+(base) sharanya@Mac code % cd ..
+(base) sharanya@Mac ~ % cd ~/energex/node-cache
+(base) sharanya@Mac node-cache % ls
+Dockerfile		package-lock.json	tests
+jest.config.js		package.json		tsconfig.bak
+node_modules		src			tsconfig.json
+(base) sharanya@Mac node-cache % nano Dockerfile
+(base) sharanya@Mac node-cache % cd ..
+(base) sharanya@Mac energex % cd ..
+(base) sharanya@Mac ~ % cd ~/code/energex
+(base) sharanya@Mac energex % rm -f .env
+(base) sharanya@Mac energex % cd ..
+(base) sharanya@Mac code % cd ..
+(base) sharanya@Mac ~ % cd ~/code/energex
+(base) sharanya@Mac energex % mkdir -p ~/code/energex
+(base) sharanya@Mac energex % mv ~/energex/node-cache ~/code/energex/
+(base) sharanya@Mac energex % cat > ~/code/energex/node-cache/.env.docker <<'EOF'
+PORT=4000
+DB_HOST=mysql
+DB_PORT=3306
+DB_NAME=energex_test
+DB_USER=energex_user
+DB_PASS=Energex!Local123
+REDIS_HOST=redis
+REDIS_PORT=6379
+CACHE_TTL=120
+EOF
+(base) sharanya@Mac energex % cat > ~/code/energex/php-api/.env.docker <<'EOF'
+APP_ENV=local
+APP_DEBUG=true
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=energex_test
+DB_USERNAME=energex_user
+DB_PASSWORD=Energex!Local123
+CACHE_DRIVER=array
+REDIS_HOST=redis
+REDIS_PORT=6379
+JWT_SECRET=e2e4348f898a12dc1783b05aadd7430a6665f81683dc2d33c2be90a5f550c7e5
+EOF
+(base) sharanya@Mac energex % ls -la ~/code/energex/node-cache/.env.docker 
+-rw-r--r--  1 sharanya  staff  151 Sep  5 00:35 /Users/sharanya/code/energex/node-cache/.env.docker
+(base) sharanya@Mac energex % ls -la ~/code/energex/php-api/.env.dockeR
+-rw-r--r--  1 sharanya  staff  283 Sep  5 00:35 /Users/sharanya/code/energex/php-api/.env.dockeR
+(base) sharanya@Mac energex % cd ~/code/energeX
+(base) sharanya@Mac energeX % rm -f .enV
+(base) sharanya@Mac energeX % docker compose up --build -d
+unable to get image 'energex-node-cache': Cannot connect to the Docker daemon at unix:///Users/sharanya/.docker/run/docker.sock. Is the docker daemon running?
+(base) sharanya@Mac energeX % docker compose up --build -d
+[+] Running 21/21
+ ✔ redis Pulled                                                                                                               9.1s 
+   ✔ ec7ed15a85c2 Download complete                                                                                           0.3s 
+   ✔ c00d46e429d4 Download complete                                                                                           5.0s 
+   ✔ 4f4fb700ef54 Already exists                                                                                              0.0s 
+   ✔ 637bc8a980ce Download complete                                                                                           0.3s 
+   ✔ c843e90a254e Download complete                                                                                           0.5s 
+   ✔ 92b33cc1d06d Download complete                                                                                           1.0s 
+   ✔ 1f864ff0defe Download complete                                                                                           0.4s 
+   ✔ d06c6b665c9b Download complete                                                                                           3.4s 
+ ✔ mysql Pulled                                                                                                              47.4s 
+   ✔ b5e369658cc0 Download complete                                                                                          26.2s 
+   ✔ a7e196ab7d9d Download complete                                                                                           0.2s 
+   ✔ 13524f5997c1 Download complete                                                                                          39.8s 
+   ✔ 43ebbefeaf6c Download complete                                                                                           1.5s 
+   ✔ ea97db50997f Download complete                                                                                           2.6s 
+   ✔ d212ae8c9f99 Download complete                                                                                           1.0s 
+   ✔ 07893b7b6550 Download complete                                                                                          11.3s 
+   ✔ 182b1f39ad9c Download complete                                                                                          22.6s 
+   ✔ d08ac0fe1ae1 Download complete                                                                                           1.5s 
+   ✔ f16d0631edce Download complete                                                                                           1.1s 
+   ✔ 49dfcacb56a5 Download complete                                                                                           1.2s 
+[+] Running 0/0
+[+] Running 0/2api     Building                                                                                               0.1s 
+ ⠙ Service php-api     Building                                                                                               0.2s 
+[+] Building 0.1s (2/2) FINISHED                                                                              docker:desktop-linux 
+ => [node-cache internal] load build definition from Dockerfile                                                               0.0s
+[+] Running 0/2ring dockerfile: 364B                                                                                          0.0s
+ ⠹ Service php-api     Building                                                                                               0.3s 
+ ⠹ Service node-cache  Building                                                                                               0.3s 
+failed to solve: dockerfile parse error on line 21: unknown instruction: EOF (did you mean ENV?)
+(base) sharanya@Mac energeX % nano ~/code/energex/php-api/Dockerfile
+(base) sharanya@Mac energeX % nano ~/code/energex/node-cache/Dockerfile
+(base) sharanya@Mac energeX % nano ~/code/energex/php-api/.env.docker
+(base) sharanya@Mac energeX % nano ~/code/energex/node-cache/.env.docker
+(base) sharanya@Mac energeX % nano ~/code/energex/docker-compose.yml
+(base) sharanya@Mac energeX % cd ~/code/energex                                                                                                                         38.3s 
+(base) sharanya@Mac energex % docker compose up -d
+[+] Running 4/5
+ ✔ Network energex_default  Created                                                                                                                                        0.1s 
+ ⠴ Container energex-mysql  Starting                                                                                                                                       0.8s 
+ ✔ Container energex-redis  Started                                                                                                                                        0.8s 
+ ✔ Container energex-php    Created                                                                                                                                        0.2s 
+ ✔ Container energex-cache  Created                                                                                                                                        0.2s 
+Error response from daemon: Ports are not available: exposing port TCP 0.0.0.0:3306 -> 0.0.0.0:0: listen tcp 0.0.0.0:3306: bind: address already in use
+(base) sharanya@Mac energex % docker compose ps
+NAME            IMAGE            COMMAND                  SERVICE   CREATED          STATUS                    PORTS
+energex-redis   redis:7-alpine   "docker-entrypoint.s…"   redis     19 seconds ago   Up 18 seconds (healthy)   0.0.0.0:6379->6379/tcp
+(base) sharanya@Mac energex % cd ~/code/energex
+(base) sharanya@Mac energex % docker compose down
+[+] Running 5/5
+ ✔ Container energex-php    Removed                                                                                                                                        0.1s 
+ ✔ Container energex-cache  Removed                                                                                                                                        0.1s 
+ ✔ Container energex-redis  Removed                                                                                                                                        0.3s 
+ ✔ Container energex-mysql  Removed                                                                                                                                        0.0s 
+ ✔ Network energex_default  Removed                                                                                                                                        0.1s 
+(base) sharanya@Mac energex % docker compose up --build -d
+[+] Running 0/2
+[+] Running 0/2-cache  Building                                                                                                                                            0.1s 
+ ⠸ Service node-cache  Building                                                                                                                                            0.3s 
+[+] Building 1.2s (23/23) FINISHED                                                                                                                         docker:desktop-linux 
+ => [node-cache internal] load build definition from Dockerfile                                                                                                            0.0s
+ => => transferring dockerfile: 198B                                                                                                                                       0.0s
+ => [php-api internal] load build definition from Dockerfile                                                                                                               0.0s
+ => => transferring dockerfile: 526B                                                                                                                                       0.0s
+ => [php-api internal] load metadata for docker.io/library/php:8.2-cli-alpine                                                                                              0.5s 
+ => [node-cache internal] load metadata for docker.io/library/node:20-alpine                                                                                               0.5s 
+ => [php-api internal] load .dockerignore                                                                                                                                  0.0s
+ => => transferring context: 2B                                                                                                                                            0.0s
+ => [node-cache internal] load .dockerignore                                                                                                                               0.0s
+ => => transferring context: 2B                                                                                                                                            0.0s
+ => [node-cache internal] load build context                                                                                                                               0.5s
+ => => transferring context: 900.38kB                                                                                                                                      0.5s
+ => [node-cache 1/6] FROM docker.io/library/node:20-alpine@sha256:eabac870db94f7342d6c33560d6613f188bbcf4bbe1f4eb47d5e2a08e1a37722                                         0.0s
+ => => resolve docker.io/library/node:20-alpine@sha256:eabac870db94f7342d6c33560d6613f188bbcf4bbe1f4eb47d5e2a08e1a37722                                                    0.0s
+ => [php-api 1/5] FROM docker.io/library/php:8.2-cli-alpine@sha256:300d52802b49bf467060d27f402776f2595297bb6c5ebae351224adea7585845                                        0.0s
+ => => resolve docker.io/library/php:8.2-cli-alpine@sha256:300d52802b49bf467060d27f402776f2595297bb6c5ebae351224adea7585845                                                0.0s
+ => [php-api internal] load build context                                                                                                                                  0.4s 
+ => => transferring context: 609.88kB                                                                                                                                      0.4s 
+ => CACHED [php-api 2/5] WORKDIR /var/www/html                                                                                                                             0.0s
+ => CACHED [php-api 3/5] RUN apk add --no-cache autoconf   dpkg-dev dpkg   file   g++   gcc   libc-dev   make   pkgconf   re2c libzip-dev oniguruma-dev curl-dev  && dock  0.0s
+ => CACHED [php-api 4/5] COPY . .                                                                                                                                          0.0s
+ => CACHED [php-api 5/5] RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"  && php composer-setup.php --install-dir=/usr/local/bin --filename  0.0s
+ => [php-api] exporting to image                                                                                                                                           0.1s
+ => => exporting layers                                                                                                                                                    0.0s
+ => => exporting manifest sha256:9fe726376ceec7e89d6e5c594ccbfc74c330d9f783434c1b94fe210f294e7b78                                                                          0.0s
+ => => exporting config sha256:ff9a5560f36996301815cfc85d4cd515e033d369c14b1e28865c5e63e0956c9a                                                                            0.0s
+ => => exporting attestation manifest sha256:d5210a199ec5b49c947551af3253508a327923fc56d8161643bdb512674aa4df                                                              0.0s
+ => => exporting manifest list sha256:cecffa9a5891d5e66242f5bc5291f6ff443e519959aade52d01354367322f4ec                                                                     0.0s
+ => => naming to docker.io/library/energex-php-api:latest                                                                                                                  0.0s 
+ => => unpacking to docker.io/library/energex-php-api:latest                                                                                                               0.0s 
+ => CACHED [node-cache 2/6] WORKDIR /usr/src/app                                                                                                                           0.0s
+ => CACHED [node-cache 3/6] COPY package*.json ./                                                                                                                          0.0s
+ => CACHED [node-cache 4/6] RUN npm ci --omit=dev                                                                                                                          0.0s
+ => CACHED [node-cache 5/6] COPY . .                                                                                                                                       0.0s
+ => CACHED [node-cache 6/6] RUN npm run build                                                                                                                              0.0s
+ => [node-cache] exporting to image                                                                                                                                        0.1s
+ => => exporting layers                                                                                                                                                    0.0s
+ => => exporting manifest sha256:8709abf4cf67b2331f6f9a1e288b57d5b5a8eabbdad6e509f927b3f5388d78c5                                                                          0.0s
+ => => exporting config sha256:58e57665c72abfa97e51a331dc26e6f95fd2ef47d48a4972935e07c1c1962898                                                                            0.0s
+ => => exporting attestation manifest sha256:f7bb71dea626dd0e561567040ddc863f77aca12916695c81821976dde2de57e7                                                              0.0s
+ => => exporting manifest list sha256:3e342bff01560f603c038b2f518fa09a59a8185c7f831e42763fe9b09651e84a                                                                     0.0s
+ => => naming to docker.io/library/energex-node-cache:latest                                                                                                               0.0s
+[+] Running 6/7g to docker.io/library/energex-node-cache:latest                                                                                                            0.0s
+ ✔ Service node-cache       Built                                                                                                                                          1.4s 
+ ✔ Service php-api          Built                                                                                                                                          1.3s 
+ ✔ Network energex_default  Created                                                                                                                                        0.0s 
+ ✔ Container energex-redis  Healthy                                                                                                                                        6.2s 
+ ✔ Container energex-mysql  Healthy                                                                                                                                       11.2s 
+ ✔ Container energex-php    Started                                                                                                                                       11.3s 
+ ⠼ Container energex-cache  Starting                                                                                                                                      11.3s 
+Error response from daemon: Ports are not available: exposing port TCP 0.0.0.0:4000 -> 0.0.0.0:0: listen tcp 0.0.0.0:4000: bind: address already in use
+(base) sharanya@Mac energex % lsof -i :4000
+COMMAND   PID     USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+node    70448 sharanya   20u  IPv6 0x3d8bfea96a39c5f3      0t0  TCP *:terabase (LISTEN)
+(base) sharanya@Mac energex % kill 70448
+(base) sharanya@Mac energex % cd ~/code/energex
+(base) sharanya@Mac energex % docker compose down
+[+] Running 5/4
+ ✔ Container energex-cache  Removed                                                                                                               0.0s 
+ ✔ Container energex-php    Removed                                                                                                              10.2s 
+ ✔ Container energex-redis  Removed                                                                                                               0.2s 
+ ✔ Container energex-mysql  Removed                                                                                                               1.3s 
+ ✔ Network energex_default  Removed                                                                                                               0.1s 
+(base) sharanya@Mac energex % docker compose up -d --build
+[+] Running 0/2
+[+] Running 0/2api     Building                                                                                                                   0.1s 
+ ⠹ Service php-api     Building                                                                                                                   0.2s 
+[+] Building 1.3s (23/23) FINISHED                                                                                                docker:desktop-linux 
+ => [php-api internal] load build definition from Dockerfile                                                                                      0.0s
+ => => transferring dockerfile: 526B                                                                                                              0.0s
+ => [node-cache internal] load build definition from Dockerfile                                                                                   0.0s
+ => => transferring dockerfile: 198B                                                                                                              0.0s
+ => [php-api internal] load metadata for docker.io/library/php:8.2-cli-alpine                                                                     0.4s 
+ => [node-cache internal] load metadata for docker.io/library/node:20-alpine                                                                      0.4s 
+ => [php-api internal] load .dockerignore                                                                                                         0.0s
+ => => transferring context: 2B                                                                                                                   0.0s
+ => [node-cache internal] load .dockerignore                                                                                                      0.0s
+ => => transferring context: 2B                                                                                                                   0.0s
+ => [node-cache internal] load build context                                                                                                      0.6s
+ => => transferring context: 900.38kB                                                                                                             0.6s
+ => [node-cache 1/6] FROM docker.io/library/node:20-alpine@sha256:eabac870db94f7342d6c33560d6613f188bbcf4bbe1f4eb47d5e2a08e1a37722                0.0s
+ => => resolve docker.io/library/node:20-alpine@sha256:eabac870db94f7342d6c33560d6613f188bbcf4bbe1f4eb47d5e2a08e1a37722                           0.0s
+ => [php-api 1/5] FROM docker.io/library/php:8.2-cli-alpine@sha256:300d52802b49bf467060d27f402776f2595297bb6c5ebae351224adea7585845               0.0s
+ => => resolve docker.io/library/php:8.2-cli-alpine@sha256:300d52802b49bf467060d27f402776f2595297bb6c5ebae351224adea7585845                       0.0s
+ => [php-api internal] load build context                                                                                                         0.4s 
+ => => transferring context: 609.88kB                                                                                                             0.4s 
+ => CACHED [php-api 2/5] WORKDIR /var/www/html                                                                                                    0.0s
+ => CACHED [php-api 3/5] RUN apk add --no-cache autoconf   dpkg-dev dpkg   file   g++   gcc   libc-dev   make   pkgconf   re2c libzip-dev onigur  0.0s
+ => CACHED [php-api 4/5] COPY . .                                                                                                                 0.0s
+ => CACHED [php-api 5/5] RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"  && php composer-setup.php --install-dir=  0.0s
+ => [php-api] exporting to image                                                                                                                  0.1s
+ => => exporting layers                                                                                                                           0.0s
+ => => exporting manifest sha256:9fe726376ceec7e89d6e5c594ccbfc74c330d9f783434c1b94fe210f294e7b78                                                 0.0s
+ => => exporting config sha256:ff9a5560f36996301815cfc85d4cd515e033d369c14b1e28865c5e63e0956c9a                                                   0.0s 
+ => => exporting attestation manifest sha256:8ef63a63cfe276092fb73ab7f8c5081b6d977d85a96c79134bf03f10b78ba9e5                                     0.0s 
+ => => exporting manifest list sha256:c954f96be1fa8d3822c975e31a1db4c6dd7ed7f04802c5bb9d94a52a675e0a12                                            0.0s
+ => => naming to docker.io/library/energex-php-api:latest                                                                                         0.0s 
+ => => unpacking to docker.io/library/energex-php-api:latest                                                                                      0.0s 
+ => CACHED [node-cache 2/6] WORKDIR /usr/src/app                                                                                                  0.0s 
+ => CACHED [node-cache 3/6] COPY package*.json ./                                                                                                 0.0s 
+ => CACHED [node-cache 4/6] RUN npm ci --omit=dev                                                                                                 0.0s
+ => CACHED [node-cache 5/6] COPY . .                                                                                                              0.0s
+ => CACHED [node-cache 6/6] RUN npm run build                                                                                                     0.0s
+ => [node-cache] exporting to image                                                                                                               0.1s
+ => => exporting layers                                                                                                                           0.0s
+ => => exporting manifest sha256:8709abf4cf67b2331f6f9a1e288b57d5b5a8eabbdad6e509f927b3f5388d78c5                                                 0.0s
+ => => exporting config sha256:58e57665c72abfa97e51a331dc26e6f95fd2ef47d48a4972935e07c1c1962898                                                   0.0s
+ => => exporting attestation manifest sha256:6c4fc3fa076477c1517d6954cc25a00f698b985cbb304843b840c8f820f4bd2d                                     0.0s
+ => => exporting manifest list sha256:79352a332edbe9ada87853b54a8f3d654bcc6ba8cbb6cdc917d7368a9ff0edc2                                            0.0s
+ => => naming to docker.io/library/energex-node-cache:latest                                                                                      0.0s
+[+] Running 5/7g to docker.io/library/energex-node-cache:latest                                                                                   0.0s
+ ✔ Service php-api          Built                                                                                                                 1.3s 
+ ✔ Service node-cache       Built                                                                                                                 1.4s 
+ ✔ Network energex_default  Created                                                                                                               0.0s 
+[+] Running 5/7ergex-redis  Waiting                                                                                                               5.5 ✔ Service php-api          Built                                                                                                               1.3s 
+ ✔ Service node-cache       Built                                                                                                               1.[+] Running 5/7nergex_default  Created                                                                                                             ✔ Service php-api          Built                                                                                                            1.3s 
+[+] Running 5/7-cache       Built                                                                                                            1.4s ✔ Service php-api          Built                                                                                                           1.3[+[+] [+[+[+[+[+[+[+] Running 6/7lt                                                                                                           1. ✔  ✔ Ser ✔  ✔  ✔  ✔  ✔  ✔  ✔ Service php-api          Built                                                                                                                   1[+] Running 6/7node-cache       Built                                                                                                                    ✔ Service php-api          Built                                                                                                                 [+] Ru[+] Running 7/7
+ ✔ Service php-api          Built                                                                                                                  1.3s  ✔ Service node-cache       Built                                                                                                                  1.4s  ✔ Network energex_default  Created                                                                                                                0.0s  ✔ Container energex-redis  Healthy                                                                                                                6.4s  ✔ Container energex-mysql  Healthy                                                                                                               11.4s  ✔ Container energex-php    Started                                                                                                               11.6s  ✔ Container energex-cache  Started                                                                                                               11.6s 
+(base) sharanya@Mac energex % cd ~/code/energex
+(base) sharanya@Mac energex % docker compose down
+[+] Running 5/5
+ ✔ Container energex-cache  Removed                                                                                                               10.2s 
+ ✔ Container energex-php    Removed                                                                                                               10.2s 
+ ✔ Container energex-mysql  Removed                                                                                                                1.5s 
+ ✔ Container energex-redis  Removed                                                                                                                0.3s 
+ ✔ Network energex_default  Removed                                                                                                                0.1s 
+(base) sharanya@Mac energex % docker compose up -d --build
+[+] Running 0/2
+[+] Running 0/2api     Building                                                                                                                    0.1s 
+ ⠹ Service php-api     Building                                                                                                                    0.2s 
+[+] Building 1.0s (23/23) FINISHED                                                                                                 docker:desktop-linux 
+ => [php-api internal] load build definition from Dockerfile                                                                                       0.0s
+ => => transferring dockerfile: 526B                                                                                                               0.0s
+ => [node-cache internal] load build definition from Dockerfile                                                                                    0.0s
+ => => transferring dockerfile: 198B                                                                                                               0.0s
+ => [node-cache internal] load metadata for docker.io/library/node:20-alpine                                                                       0.3s 
+ => [php-api internal] load metadata for docker.io/library/php:8.2-cli-alpine                                                                      0.3s 
+ => [php-api internal] load .dockerignore                                                                                                          0.0s
+ => => transferring context: 2B                                                                                                                    0.0s
+ => [node-cache internal] load .dockerignore                                                                                                       0.0s
+ => => transferring context: 2B                                                                                                                    0.0s
+ => [php-api 1/5] FROM docker.io/library/php:8.2-cli-alpine@sha256:300d52802b49bf467060d27f402776f2595297bb6c5ebae351224adea7585845                0.0s
+ => => resolve docker.io/library/php:8.2-cli-alpine@sha256:300d52802b49bf467060d27f402776f2595297bb6c5ebae351224adea7585845                        0.0s
+ => [php-api internal] load build context                                                                                                          0.4s
+ => => transferring context: 609.88kB                                                                                                              0.4s
+ => [node-cache 1/6] FROM docker.io/library/node:20-alpine@sha256:eabac870db94f7342d6c33560d6613f188bbcf4bbe1f4eb47d5e2a08e1a37722                 0.0s
+ => => resolve docker.io/library/node:20-alpine@sha256:eabac870db94f7342d6c33560d6613f188bbcf4bbe1f4eb47d5e2a08e1a37722                            0.0s
+ => [node-cache internal] load build context                                                                                                       0.5s 
+ => => transferring context: 900.38kB                                                                                                              0.5s 
+ => CACHED [php-api 2/5] WORKDIR /var/www/html                                                                                                     0.0s
+ => CACHED [php-api 3/5] RUN apk add --no-cache autoconf   dpkg-dev dpkg   file   g++   gcc   libc-dev   make   pkgconf   re2c libzip-dev oniguru  0.0s
+ => CACHED [php-api 4/5] COPY . .                                                                                                                  0.0s
+ => CACHED [php-api 5/5] RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"  && php composer-setup.php --install-dir=/  0.0s
+ => [php-api] exporting to image                                                                                                                   0.1s
+ => => exporting layers                                                                                                                            0.0s
+ => => exporting manifest sha256:9fe726376ceec7e89d6e5c594ccbfc74c330d9f783434c1b94fe210f294e7b78                                                  0.0s
+ => => exporting config sha256:ff9a5560f36996301815cfc85d4cd515e033d369c14b1e28865c5e63e0956c9a                                                    0.0s 
+ => => exporting attestation manifest sha256:3ec8b7338171eee5c57e8b5f47975cb3186c3bda97ee204b65aaf9a89f849432                                      0.0s 
+ => => exporting manifest list sha256:ad2df95fb8aaa8976e6b9401b72244765560e0c0ad0d85177d66d7682e34b404                                             0.0s 
+ => => naming to docker.io/library/energex-php-api:latest                                                                                          0.0s 
+ => => unpacking to docker.io/library/energex-php-api:latest                                                                                       0.0s
+ => CACHED [node-cache 2/6] WORKDIR /usr/src/app                                                                                                   0.0s
+ => CACHED [node-cache 3/6] COPY package*.json ./                                                                                                  0.0s
+ => CACHED [node-cache 4/6] RUN npm ci --omit=dev                                                                                                  0.0s
+ => CACHED [node-cache 5/6] COPY . .                                                                                                               0.0s
+ => CACHED [node-cache 6/6] RUN npm run build                                                                                                      0.0s
+ => [node-cache] exporting to image                                                                                                                0.1s
+ => => exporting layers                                                                                                                            0.0s
+ => => exporting manifest sha256:8709abf4cf67b2331f6f9a1e288b57d5b5a8eabbdad6e509f927b3f5388d78c5                                                  0.0s
+ => => exporting config sha256:58e57665c72abfa97e51a331dc26e6f95fd2ef47d48a4972935e07c1c1962898                                                    0.0s
+ => => exporting attestation manifest sha256:acd892a1d4719ab517e18b8db2582e54c0c2143f9aa185c59efb911260efcd42                                      0.0s
+ => => exporting manifest list sha256:6c32ae1b3d7d01674a2070f377b32aef7d8790378f3ae586c935c6ed05fdd62c                                             0.0s
+ => => naming to docker.io/library/energex-node-cache:latest                                                                                       0.0s
+[+] Running 7/7g to docker.io/library/energex-node-cache:latest                                                                                    0.0s
+ ✔ Service php-api          Built                                                                                                                  1.1s 
+ ✔ Service node-cache       Built                                                                                                                  1.1s 
+ ✔ Network energex_default  Created                                                                                                                0.0s 
+ ✔ Container energex-redis  Healthy                                                                                                                6.2s 
+ ✔ Container energex-mysql  Healthy                                                                                                               11.2s 
+ ✔ Container energex-php    Started                                                                                                               11.3s 
+ ✔ Container energex-cache  Started                                                                                                               11.3s 
+(base) sharanya@Mac energex % docker compose ps
+NAME            IMAGE                COMMAND                  SERVICE      CREATED          STATUS                    PORTS
+energex-cache   energex-node-cache   "docker-entrypoint.s…"   node-cache   24 seconds ago   Up 12 seconds             0.0.0.0:4000->4000/tcp
+energex-mysql   mysql:8.0            "docker-entrypoint.s…"   mysql        24 seconds ago   Up 23 seconds (healthy)   33060/tcp, 0.0.0.0:3307->3306/tcp
+energex-php     energex-php-api      "docker-php-entrypoi…"   php-api      24 seconds ago   Up 12 seconds             0.0.0.0:8000->8000/tcp
+energex-redis   redis:7-alpine       "docker-entrypoint.s…"   redis        24 seconds ago   Up 23 seconds (healthy)   0.0.0.0:6379->6379/tcp
