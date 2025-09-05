@@ -3,12 +3,11 @@ name: Docker Images
 on:
   push:
     branches: [ main ]
-    tags: ['v*.*.*']
+    tags: [ 'v*.*.*' ]
 
 jobs:
   build-push:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -33,4 +32,3 @@ jobs:
           file: ./node-cache/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/energex-node-cache:latest
-
