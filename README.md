@@ -15,6 +15,8 @@ Build a microservice API using Lumen (PHP) and Node.js (TypeScript) that integra
 7. CI/CD	Set up GitHub Actions/GitLab CI to automate testing
 
 ### Repository tree
+
+```text
 ~/code/energex
 ├─ docker-compose.yml
 ├─ mysql/
@@ -42,6 +44,7 @@ Build a microservice API using Lumen (PHP) and Node.js (TypeScript) that integra
 │        └─ PostsTest.php
 ├─ src/           # React (Vite) frontend
 └─ Screening Test - EnergeX - Backend.postman_collection.json
+
 
 
 ### File Paths
