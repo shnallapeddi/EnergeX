@@ -1,0 +1,927 @@
+Last login: Tue Sep  2 22:45:39 on ttys000
+eval "$(/opt/homebrew/bin/brew shellenv)"
+(base) sharanya@Mac ~ % cd frontend
+(base) sharanya@Mac frontend % npm i axios
+
+added 24 packages, and audited 213 packages in 1s
+
+54 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+(base) sharanya@Mac frontend % brew update
+==> Updating Homebrew...
+Already up-to-date.
+(base) sharanya@Mac frontend % brew install --cask postman
+==> Downloading https://dl.pstmn.io/download/version/11.61.4/osx_arm64
+######################################################################### 100.0%
+==> Installing Cask postman
+==> Moving App 'Postman.app' to '/Applications/Postman.app'
+🍺  postman was successfully installed!
+==> No outdated dependents to upgrade!
+(base) sharanya@Mac frontend % open -a "Postman"
+(base) sharanya@Mac frontend % php -v
+PHP 8.4.12 (cli) (built: Aug 26 2025 13:36:28) (NTS)
+Copyright (c) The PHP Group
+Built by Homebrew
+Zend Engine v4.4.12, Copyright (c) Zend Technologies
+    with Zend OPcache v8.4.12, Copyright (c), by Zend Technologies
+(base) sharanya@Mac frontend % composer -v
+   ______
+  / ____/___  ____ ___  ____  ____  ________  _____
+ / /   / __ \/ __ `__ \/ __ \/ __ \/ ___/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ (__  )  __/ /
+\____/\____/_/ /_/ /_/ .___/\____/____/\___/_/
+                    /_/
+Composer version 2.8.11 2025-08-21 11:29:39
+
+Usage:
+  command [options] [arguments]
+
+Options:
+  -h, --help                     Display help for the given command. When no command is given display help for the list command
+  -q, --quiet                    Do not output any message
+  -V, --version                  Display this application version
+      --ansi|--no-ansi           Force (or disable --no-ansi) ANSI output
+  -n, --no-interaction           Do not ask any interactive question
+      --profile                  Display timing and memory usage information
+      --no-plugins               Whether to disable plugins.
+      --no-scripts               Skips the execution of all scripts defined in composer.json file.
+  -d, --working-dir=WORKING-DIR  If specified, use the given directory as working directory.
+      --no-cache                 Prevent use of the cache
+  -v|vv|vvv, --verbose           Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Available commands:
+  about                Shows a short information about Composer
+  archive              Creates an archive of this composer package
+  audit                Checks for security vulnerability advisories for installed packages
+  browse               [home] Opens the package's repository URL or homepage in your browser
+  bump                 Increases the lower limit of your composer.json requirements to the currently installed versions
+  check-platform-reqs  Check that platform requirements are satisfied
+  clear-cache          [clearcache|cc] Clears composer's internal package cache
+  completion           Dump the shell completion script
+  config               Sets config options
+  create-project       Creates new project from a package into given directory
+  depends              [why] Shows which packages cause the given package to be installed
+  diagnose             Diagnoses the system to identify common errors
+  dump-autoload        [dumpautoload] Dumps the autoloader
+  exec                 Executes a vendored binary/script
+  fund                 Discover how to help fund the maintenance of your dependencies
+  global               Allows running commands in the global composer dir ($COMPOSER_HOME)
+  help                 Display help for a command
+  init                 Creates a basic composer.json file in current directory
+  install              [i] Installs the project dependencies from the composer.lock file if present, or falls back on the composer.json
+  licenses             Shows information about licenses of dependencies
+  list                 List commands
+  outdated             Shows a list of installed packages that have updates available, including their latest version
+  prohibits            [why-not] Shows which packages prevent the given package from being installed
+  reinstall            Uninstalls and reinstalls the given package names
+  remove               [rm|uninstall] Removes a package from the require or require-dev
+  require              [r] Adds required packages to your composer.json and installs them
+  run-script           [run] Runs the scripts defined in composer.json
+  search               Searches for packages
+  self-update          [selfupdate] Updates composer.phar to the latest version
+  show                 [info] Shows information about packages
+  status               Shows a list of locally modified packages
+  suggests             Shows package suggestions
+  update               [u|upgrade] Updates your dependencies to the latest version according to composer.json, and updates the composer.lock file
+  validate             Validates a composer.json and composer.lock
+(base) sharanya@Mac frontend % mysql --version
+mysql  Ver 9.1.0 for macos14 on arm64 (MySQL Community Server - GPL)
+(base) sharanya@Mac frontend % redis-cli ping
+PONG
+(base) sharanya@Mac frontend % mkdir -p ~/code/energex && cd ~/code/energex
+(base) sharanya@Mac energex % composer create-project laravel/lumen:^10 php-api
+Creating a "laravel/lumen:^10" project at "./php-api"
+Installing laravel/lumen (v10.0.0)
+  - Downloading laravel/lumen (v10.0.0)
+  - Installing laravel/lumen (v10.0.0): Extracting archive
+Created project in /Users/sharanya/code/energex/php-api
+> @php -r "file_exists('.env') || copy('.env.example', '.env');"
+Loading composer repositories with package information
+Updating dependencies
+Lock file operations: 105 installs, 0 updates, 0 removals
+  - Locking brick/math (0.12.3)
+  - Locking carbonphp/carbon-doctrine-types (2.1.0)
+  - Locking doctrine/inflector (2.1.0)
+  - Locking doctrine/lexer (3.0.1)
+  - Locking dragonmantank/cron-expression (v3.4.0)
+  - Locking egulias/email-validator (4.0.4)
+  - Locking fakerphp/faker (v1.24.1)
+  - Locking fruitcake/php-cors (v1.3.0)
+  - Locking graham-campbell/result-type (v1.1.3)
+  - Locking guzzlehttp/uri-template (v1.0.5)
+  - Locking hamcrest/hamcrest-php (v2.1.1)
+  - Locking illuminate/auth (v10.48.28)
+  - Locking illuminate/broadcasting (v10.48.28)
+  - Locking illuminate/bus (v10.48.28)
+  - Locking illuminate/cache (v10.48.28)
+  - Locking illuminate/collections (v10.48.28)
+  - Locking illuminate/conditionable (v10.48.28)
+  - Locking illuminate/config (v10.48.28)
+  - Locking illuminate/console (v10.48.28)
+  - Locking illuminate/container (v10.48.28)
+  - Locking illuminate/contracts (v10.48.28)
+  - Locking illuminate/database (v10.48.28)
+  - Locking illuminate/encryption (v10.48.28)
+  - Locking illuminate/events (v10.48.28)
+  - Locking illuminate/filesystem (v10.48.28)
+  - Locking illuminate/hashing (v10.48.28)
+  - Locking illuminate/http (v10.48.28)
+  - Locking illuminate/log (v10.48.28)
+  - Locking illuminate/macroable (v10.48.28)
+  - Locking illuminate/pagination (v10.48.28)
+  - Locking illuminate/pipeline (v10.48.28)
+  - Locking illuminate/queue (v10.48.28)
+  - Locking illuminate/session (v10.48.28)
+  - Locking illuminate/support (v10.48.28)
+  - Locking illuminate/testing (v10.48.28)
+  - Locking illuminate/translation (v10.48.28)
+  - Locking illuminate/validation (v10.48.28)
+  - Locking illuminate/view (v10.48.28)
+  - Locking laravel/lumen-framework (v10.0.4)
+  - Locking laravel/prompts (v0.1.25)
+  - Locking laravel/serializable-closure (v1.3.7)
+  - Locking mockery/mockery (1.6.12)
+  - Locking monolog/monolog (3.9.0)
+  - Locking myclabs/deep-copy (1.13.4)
+  - Locking nesbot/carbon (2.73.0)
+  - Locking nikic/fast-route (v1.3.0)
+  - Locking nikic/php-parser (v5.6.1)
+  - Locking nunomaduro/termwind (v1.17.0)
+  - Locking phar-io/manifest (2.0.4)
+  - Locking phar-io/version (3.2.1)
+  - Locking phpoption/phpoption (1.9.4)
+  - Locking phpunit/php-code-coverage (10.1.16)
+  - Locking phpunit/php-file-iterator (4.1.0)
+  - Locking phpunit/php-invoker (4.0.0)
+  - Locking phpunit/php-text-template (3.0.1)
+  - Locking phpunit/php-timer (6.0.0)
+  - Locking phpunit/phpunit (10.5.53)
+  - Locking psr/clock (1.0.0)
+  - Locking psr/container (2.0.2)
+  - Locking psr/event-dispatcher (1.0.0)
+  - Locking psr/log (3.0.2)
+  - Locking psr/simple-cache (3.0.0)
+  - Locking ramsey/collection (2.1.1)
+  - Locking ramsey/uuid (4.9.0)
+  - Locking sebastian/cli-parser (2.0.1)
+  - Locking sebastian/code-unit (2.0.0)
+  - Locking sebastian/code-unit-reverse-lookup (3.0.0)
+  - Locking sebastian/comparator (5.0.3)
+  - Locking sebastian/complexity (3.2.0)
+  - Locking sebastian/diff (5.1.1)
+  - Locking sebastian/environment (6.1.0)
+  - Locking sebastian/exporter (5.1.2)
+  - Locking sebastian/global-state (6.0.2)
+  - Locking sebastian/lines-of-code (2.0.2)
+  - Locking sebastian/object-enumerator (5.0.0)
+  - Locking sebastian/object-reflector (3.0.0)
+  - Locking sebastian/recursion-context (5.0.1)
+  - Locking sebastian/type (4.0.0)
+  - Locking sebastian/version (4.0.1)
+  - Locking symfony/console (v6.4.25)
+  - Locking symfony/deprecation-contracts (v3.6.0)
+  - Locking symfony/error-handler (v6.4.24)
+  - Locking symfony/event-dispatcher (v7.3.3)
+  - Locking symfony/event-dispatcher-contracts (v3.6.0)
+  - Locking symfony/finder (v6.4.24)
+  - Locking symfony/http-foundation (v6.4.25)
+  - Locking symfony/http-kernel (v6.4.25)
+  - Locking symfony/mime (v6.4.24)
+  - Locking symfony/polyfill-ctype (v1.33.0)
+  - Locking symfony/polyfill-intl-grapheme (v1.33.0)
+  - Locking symfony/polyfill-intl-idn (v1.33.0)
+  - Locking symfony/polyfill-intl-normalizer (v1.33.0)
+  - Locking symfony/polyfill-mbstring (v1.33.0)
+  - Locking symfony/polyfill-php80 (v1.33.0)
+  - Locking symfony/polyfill-php83 (v1.33.0)
+  - Locking symfony/process (v6.4.25)
+  - Locking symfony/service-contracts (v3.6.0)
+  - Locking symfony/string (v7.3.3)
+  - Locking symfony/translation (v6.4.24)
+  - Locking symfony/translation-contracts (v3.6.0)
+  - Locking symfony/var-dumper (v6.4.25)
+  - Locking theseer/tokenizer (1.2.3)
+  - Locking vlucas/phpdotenv (v5.6.2)
+  - Locking voku/portable-ascii (2.0.3)
+  - Locking webmozart/assert (1.11.0)
+Writing lock file
+Installing dependencies from lock file (including require-dev)
+Package operations: 105 installs, 0 updates, 0 removals
+  - Downloading doctrine/inflector (2.1.0)
+  - Downloading symfony/polyfill-intl-normalizer (v1.33.0)
+  - Downloading symfony/polyfill-intl-idn (v1.33.0)
+  - Downloading doctrine/lexer (3.0.1)
+  - Downloading egulias/email-validator (4.0.4)
+  - Downloading symfony/deprecation-contracts (v3.6.0)
+  - Downloading psr/container (2.0.2)
+  - Downloading fakerphp/faker (v1.24.1)
+  - Downloading symfony/polyfill-php83 (v1.33.0)
+  - Downloading symfony/polyfill-mbstring (v1.33.0)
+  - Downloading symfony/http-foundation (v6.4.25)
+  - Downloading fruitcake/php-cors (v1.3.0)
+  - Downloading symfony/polyfill-php80 (v1.33.0)
+  - Downloading guzzlehttp/uri-template (v1.0.5)
+  - Downloading illuminate/conditionable (v10.48.28)
+  - Downloading symfony/finder (v6.4.24)
+  - Downloading voku/portable-ascii (2.0.3)
+  - Downloading symfony/translation-contracts (v3.6.0)
+  - Downloading symfony/translation (v6.4.24)
+  - Downloading psr/clock (1.0.0)
+  - Downloading carbonphp/carbon-doctrine-types (2.1.0)
+  - Downloading nesbot/carbon (2.73.0)
+  - Downloading illuminate/macroable (v10.48.28)
+  - Downloading psr/simple-cache (3.0.0)
+  - Downloading illuminate/contracts (v10.48.28)
+  - Downloading illuminate/collections (v10.48.28)
+  - Downloading symfony/polyfill-ctype (v1.33.0)
+  - Downloading illuminate/support (v10.48.28)
+  - Downloading illuminate/filesystem (v10.48.28)
+  - Downloading illuminate/session (v10.48.28)
+  - Downloading phpoption/phpoption (1.9.4)
+  - Downloading graham-campbell/result-type (v1.1.3)
+  - Downloading vlucas/phpdotenv (v5.6.2)
+  - Downloading symfony/var-dumper (v6.4.25)
+  - Downloading symfony/mime (v6.4.24)
+  - Downloading psr/event-dispatcher (1.0.0)
+  - Downloading symfony/event-dispatcher-contracts (v3.6.0)
+  - Downloading symfony/event-dispatcher (v7.3.3)
+  - Downloading psr/log (3.0.2)
+  - Downloading symfony/error-handler (v6.4.24)
+  - Downloading symfony/http-kernel (v6.4.25)
+  - Downloading symfony/polyfill-intl-grapheme (v1.33.0)
+  - Downloading symfony/string (v7.3.3)
+  - Downloading symfony/service-contracts (v3.6.0)
+  - Downloading symfony/console (v6.4.25)
+  - Downloading nikic/fast-route (v1.3.0)
+  - Downloading illuminate/container (v10.48.28)
+  - Downloading illuminate/pipeline (v10.48.28)
+  - Downloading illuminate/bus (v10.48.28)
+  - Downloading illuminate/events (v10.48.28)
+  - Downloading illuminate/view (v10.48.28)
+  - Downloading illuminate/translation (v10.48.28)
+  - Downloading brick/math (0.12.3)
+  - Downloading illuminate/validation (v10.48.28)
+  - Downloading illuminate/testing (v10.48.28)
+  - Downloading symfony/process (v6.4.25)
+  - Downloading ramsey/collection (2.1.1)
+  - Downloading ramsey/uuid (4.9.0)
+  - Downloading laravel/serializable-closure (v1.3.7)
+  - Downloading illuminate/database (v10.48.28)
+  - Downloading nunomaduro/termwind (v1.17.0)
+  - Downloading laravel/prompts (v0.1.25)
+  - Downloading illuminate/console (v10.48.28)
+  - Downloading illuminate/queue (v10.48.28)
+  - Downloading illuminate/pagination (v10.48.28)
+  - Downloading monolog/monolog (3.9.0)
+  - Downloading illuminate/log (v10.48.28)
+  - Downloading illuminate/http (v10.48.28)
+  - Downloading illuminate/hashing (v10.48.28)
+  - Downloading illuminate/encryption (v10.48.28)
+  - Downloading illuminate/config (v10.48.28)
+  - Downloading illuminate/cache (v10.48.28)
+  - Downloading illuminate/broadcasting (v10.48.28)
+  - Downloading illuminate/auth (v10.48.28)
+  - Downloading webmozart/assert (1.11.0)
+  - Downloading dragonmantank/cron-expression (v3.4.0)
+  - Downloading laravel/lumen-framework (v10.0.4)
+  - Downloading hamcrest/hamcrest-php (v2.1.1)
+  - Downloading mockery/mockery (1.6.12)
+  - Downloading sebastian/version (4.0.1)
+  - Downloading sebastian/type (4.0.0)
+  - Downloading sebastian/recursion-context (5.0.1)
+  - Downloading sebastian/object-reflector (3.0.0)
+  - Downloading sebastian/object-enumerator (5.0.0)
+  - Downloading sebastian/global-state (6.0.2)
+  - Downloading sebastian/exporter (5.1.2)
+  - Downloading sebastian/environment (6.1.0)
+  - Downloading sebastian/diff (5.1.1)
+  - Downloading sebastian/comparator (5.0.3)
+  - Downloading sebastian/code-unit (2.0.0)
+  - Downloading sebastian/cli-parser (2.0.1)
+  - Downloading phpunit/php-timer (6.0.0)
+  - Downloading phpunit/php-text-template (3.0.1)
+  - Downloading phpunit/php-invoker (4.0.0)
+  - Downloading phpunit/php-file-iterator (4.1.0)
+  - Downloading theseer/tokenizer (1.2.3)
+  - Downloading nikic/php-parser (v5.6.1)
+  - Downloading sebastian/lines-of-code (2.0.2)
+  - Downloading sebastian/complexity (3.2.0)
+  - Downloading sebastian/code-unit-reverse-lookup (3.0.0)
+  - Downloading phpunit/php-code-coverage (10.1.16)
+  - Downloading phar-io/version (3.2.1)
+  - Downloading phar-io/manifest (2.0.4)
+  - Downloading myclabs/deep-copy (1.13.4)
+  - Downloading phpunit/phpunit (10.5.53)
+  - Installing doctrine/inflector (2.1.0): Extracting archive
+  - Installing symfony/polyfill-intl-normalizer (v1.33.0): Extracting archive
+  - Installing symfony/polyfill-intl-idn (v1.33.0): Extracting archive
+  - Installing doctrine/lexer (3.0.1): Extracting archive
+  - Installing egulias/email-validator (4.0.4): Extracting archive
+  - Installing symfony/deprecation-contracts (v3.6.0): Extracting archive
+  - Installing psr/container (2.0.2): Extracting archive
+  - Installing fakerphp/faker (v1.24.1): Extracting archive
+  - Installing symfony/polyfill-php83 (v1.33.0): Extracting archive
+  - Installing symfony/polyfill-mbstring (v1.33.0): Extracting archive
+  - Installing symfony/http-foundation (v6.4.25): Extracting archive
+  - Installing fruitcake/php-cors (v1.3.0): Extracting archive
+  - Installing symfony/polyfill-php80 (v1.33.0): Extracting archive
+  - Installing guzzlehttp/uri-template (v1.0.5): Extracting archive
+  - Installing illuminate/conditionable (v10.48.28): Extracting archive
+  - Installing symfony/finder (v6.4.24): Extracting archive
+  - Installing voku/portable-ascii (2.0.3): Extracting archive
+  - Installing symfony/translation-contracts (v3.6.0): Extracting archive
+  - Installing symfony/translation (v6.4.24): Extracting archive
+  - Installing psr/clock (1.0.0): Extracting archive
+  - Installing carbonphp/carbon-doctrine-types (2.1.0): Extracting archive
+  - Installing nesbot/carbon (2.73.0): Extracting archive
+  - Installing illuminate/macroable (v10.48.28): Extracting archive
+  - Installing psr/simple-cache (3.0.0): Extracting archive
+  - Installing illuminate/contracts (v10.48.28): Extracting archive
+  - Installing illuminate/collections (v10.48.28): Extracting archive
+  - Installing symfony/polyfill-ctype (v1.33.0): Extracting archive
+  - Installing illuminate/support (v10.48.28): Extracting archive
+  - Installing illuminate/filesystem (v10.48.28): Extracting archive
+  - Installing illuminate/session (v10.48.28): Extracting archive
+  - Installing phpoption/phpoption (1.9.4): Extracting archive
+  - Installing graham-campbell/result-type (v1.1.3): Extracting archive
+  - Installing vlucas/phpdotenv (v5.6.2): Extracting archive
+  - Installing symfony/var-dumper (v6.4.25): Extracting archive
+  - Installing symfony/mime (v6.4.24): Extracting archive
+  - Installing psr/event-dispatcher (1.0.0): Extracting archive
+  - Installing symfony/event-dispatcher-contracts (v3.6.0): Extracting archive
+  - Installing symfony/event-dispatcher (v7.3.3): Extracting archive
+  - Installing psr/log (3.0.2): Extracting archive
+  - Installing symfony/error-handler (v6.4.24): Extracting archive
+  - Installing symfony/http-kernel (v6.4.25): Extracting archive
+  - Installing symfony/polyfill-intl-grapheme (v1.33.0): Extracting archive
+  - Installing symfony/string (v7.3.3): Extracting archive
+  - Installing symfony/service-contracts (v3.6.0): Extracting archive
+  - Installing symfony/console (v6.4.25): Extracting archive
+  - Installing nikic/fast-route (v1.3.0): Extracting archive
+  - Installing illuminate/container (v10.48.28): Extracting archive
+  - Installing illuminate/pipeline (v10.48.28): Extracting archive
+  - Installing illuminate/bus (v10.48.28): Extracting archive
+  - Installing illuminate/events (v10.48.28): Extracting archive
+  - Installing illuminate/view (v10.48.28): Extracting archive
+  - Installing illuminate/translation (v10.48.28): Extracting archive
+  - Installing brick/math (0.12.3): Extracting archive
+  - Installing illuminate/validation (v10.48.28): Extracting archive
+  - Installing illuminate/testing (v10.48.28): Extracting archive
+  - Installing symfony/process (v6.4.25): Extracting archive
+  - Installing ramsey/collection (2.1.1): Extracting archive
+  - Installing ramsey/uuid (4.9.0): Extracting archive
+  - Installing laravel/serializable-closure (v1.3.7): Extracting archive
+  - Installing illuminate/database (v10.48.28): Extracting archive
+  - Installing nunomaduro/termwind (v1.17.0): Extracting archive
+  - Installing laravel/prompts (v0.1.25): Extracting archive
+  - Installing illuminate/console (v10.48.28): Extracting archive
+  - Installing illuminate/queue (v10.48.28): Extracting archive
+  - Installing illuminate/pagination (v10.48.28): Extracting archive
+  - Installing monolog/monolog (3.9.0): Extracting archive
+  - Installing illuminate/log (v10.48.28): Extracting archive
+  - Installing illuminate/http (v10.48.28): Extracting archive
+  - Installing illuminate/hashing (v10.48.28): Extracting archive
+  - Installing illuminate/encryption (v10.48.28): Extracting archive
+  - Installing illuminate/config (v10.48.28): Extracting archive
+  - Installing illuminate/cache (v10.48.28): Extracting archive
+  - Installing illuminate/broadcasting (v10.48.28): Extracting archive
+  - Installing illuminate/auth (v10.48.28): Extracting archive
+  - Installing webmozart/assert (1.11.0): Extracting archive
+  - Installing dragonmantank/cron-expression (v3.4.0): Extracting archive
+  - Installing laravel/lumen-framework (v10.0.4): Extracting archive
+  - Installing hamcrest/hamcrest-php (v2.1.1): Extracting archive
+  - Installing mockery/mockery (1.6.12): Extracting archive
+  - Installing sebastian/version (4.0.1): Extracting archive
+  - Installing sebastian/type (4.0.0): Extracting archive
+  - Installing sebastian/recursion-context (5.0.1): Extracting archive
+  - Installing sebastian/object-reflector (3.0.0): Extracting archive
+  - Installing sebastian/object-enumerator (5.0.0): Extracting archive
+  - Installing sebastian/global-state (6.0.2): Extracting archive
+  - Installing sebastian/exporter (5.1.2): Extracting archive
+  - Installing sebastian/environment (6.1.0): Extracting archive
+  - Installing sebastian/diff (5.1.1): Extracting archive
+  - Installing sebastian/comparator (5.0.3): Extracting archive
+  - Installing sebastian/code-unit (2.0.0): Extracting archive
+  - Installing sebastian/cli-parser (2.0.1): Extracting archive
+  - Installing phpunit/php-timer (6.0.0): Extracting archive
+  - Installing phpunit/php-text-template (3.0.1): Extracting archive
+  - Installing phpunit/php-invoker (4.0.0): Extracting archive
+  - Installing phpunit/php-file-iterator (4.1.0): Extracting archive
+  - Installing theseer/tokenizer (1.2.3): Extracting archive
+  - Installing nikic/php-parser (v5.6.1): Extracting archive
+  - Installing sebastian/lines-of-code (2.0.2): Extracting archive
+  - Installing sebastian/complexity (3.2.0): Extracting archive
+  - Installing sebastian/code-unit-reverse-lookup (3.0.0): Extracting archive
+  - Installing phpunit/php-code-coverage (10.1.16): Extracting archive
+  - Installing phar-io/version (3.2.1): Extracting archive
+  - Installing phar-io/manifest (2.0.4): Extracting archive
+  - Installing myclabs/deep-copy (1.13.4): Extracting archive
+  - Installing phpunit/phpunit (10.5.53): Extracting archive
+40 package suggestions were added by new dependencies, use `composer suggest` to see details.
+Generating optimized autoload files
+61 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+No security vulnerability advisories found.
+(base) sharanya@Mac energex % cd php-api
+(base) sharanya@Mac php-api % composer require php-open-source-saver/jwt-auth:^2.0
+./composer.json has been updated
+Running composer update php-open-source-saver/jwt-auth
+Loading composer repositories with package information
+Updating dependencies
+Lock file operations: 4 installs, 0 updates, 0 removals
+  - Locking lcobucci/jwt (5.5.0)
+  - Locking namshi/jose (7.2.3)
+  - Locking php-open-source-saver/jwt-auth (v2.8.2)
+  - Locking symfony/polyfill-php56 (v1.20.0)
+Writing lock file
+Installing dependencies from lock file (including require-dev)
+Package operations: 4 installs, 0 updates, 0 removals
+  - Downloading namshi/jose (7.2.3)
+  - Downloading lcobucci/jwt (5.5.0)
+  - Downloading php-open-source-saver/jwt-auth (v2.8.2)
+  - Installing symfony/polyfill-php56 (v1.20.0)
+  - Installing namshi/jose (7.2.3): Extracting archive
+  - Installing lcobucci/jwt (5.5.0): Extracting archive
+  - Installing php-open-source-saver/jwt-auth (v2.8.2): Extracting archive
+2 package suggestions were added by new dependencies, use `composer suggest` to see details.
+Generating optimized autoload files
+63 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+No security vulnerability advisories found.
+(base) sharanya@Mac php-api % composer require illuminate/validation
+./composer.json has been updated
+Running composer update illuminate/validation
+Loading composer repositories with package information
+Updating dependencies
+Nothing to modify in lock file
+Writing lock file
+Installing dependencies from lock file (including require-dev)
+Nothing to install, update or remove
+Generating optimized autoload files
+63 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+No security vulnerability advisories found.
+Using version ^10.48 for illuminate/validation
+(base) sharanya@Mac php-api % composer require predis/predis
+./composer.json has been updated
+Running composer update predis/predis
+Loading composer repositories with package information
+Updating dependencies
+Lock file operations: 2 installs, 0 updates, 0 removals
+  - Locking predis/predis (v3.2.0)
+  - Locking psr/http-message (2.0)
+Writing lock file
+Installing dependencies from lock file (including require-dev)
+Package operations: 2 installs, 0 updates, 0 removals
+  - Downloading psr/http-message (2.0)
+  - Downloading predis/predis (v3.2.0)
+  - Installing psr/http-message (2.0): Extracting archive
+  - Installing predis/predis (v3.2.0): Extracting archive
+1 package suggestions were added by new dependencies, use `composer suggest` to see details.
+Generating optimized autoload files
+64 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+No security vulnerability advisories found.
+Using version ^3.2 for predis/predis
+(base) sharanya@Mac php-api % composer show | grep -E 'jwt-auth|predis|illuminate/validation'
+illuminate/validation              10.48.28 The Illuminate Validation package.
+php-open-source-saver/jwt-auth     2.8.2    JSON Web Token Authentication for Laravel...
+predis/predis                      3.2.0    A flexible and feature-complete Redis/Val...
+(base) sharanya@Mac php-api % open -a "TextEdit" bootstrap/app.php
+(base) sharanya@Mac php-api % open -a "TextEdit" bootstrap/app.php
+(base) sharanya@Mac php-api % open -a "TextEdit" bootstrap/app.php
+(base) sharanya@Mac php-api % mkdir -p config
+cat > config/auth.php <<'PHP'
+<?php
+return [
+  'defaults' => ['guard' => 'api'],
+  'guards' => [
+    'api' => [
+      'driver'   => 'jwt',
+      'provider' => 'users',
+    ],
+  ],
+  'providers' => [
+    'users' => [
+      'driver' => 'eloquent',
+      'model'  => App\Models\User::class,
+    ],
+  ],
+];
+PHP
+(base) sharanya@Mac php-api % composer require illuminate/translation -W
+./composer.json has been updated
+Running composer update illuminate/translation --with-all-dependencies
+Loading composer repositories with package information
+Updating dependencies
+Nothing to modify in lock file
+Writing lock file
+Installing dependencies from lock file (including require-dev)
+Nothing to install, update or remove
+Generating optimized autoload files
+64 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+No security vulnerability advisories found.
+Using version ^10.48 for illuminate/translation
+(base) sharanya@Mac php-api % # Create/overwrite core env values
+cat > .env <<'ENV'
+APP_ENV=local
+APP_DEBUG=true
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=energex_test
+DB_USERNAME=energex_user
+DB_PASSWORD=EnergeX!Local123
+
+REDIS_HOST=127.0.0.1
+REDIS_PORT=6379
+ENV
+zsh: command not found: #
+(base) sharanya@Mac php-api % ls -l .env                        
+-rw-r--r--  1 sharanya  staff  198 Sep  3 20:03 .env
+(base) sharanya@Mac php-api % cat .env
+APP_ENV=local
+APP_DEBUG=true
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=energex_test
+DB_USERNAME=energex_user
+DB_PASSWORD=EnergeX!Local123
+
+REDIS_HOST=127.0.0.1
+REDIS_PORT=6379
+(base) sharanya@Mac php-api % php -r "echo 'JWT_SECRET='.bin2hex(random_bytes(32)).PHP_EOL;" >> .env
+(base) sharanya@Mac php-api % mkdir -p database/migrations
+(base) sharanya@Mac php-api % ts1=$(date +%Y_%m_%d_%H%M%S)
+cat > database/migrations/${ts1}_create_users_table.php <<'PHP'
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    public function up(): void
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email', 191)->unique();
+            $table->string('password', 191);
+            $table->timestamps();
+        });
+    }
+    public function down(): void
+    {
+        Schema::dropIfExists('users');
+    }
+};
+PHP
+(base) sharanya@Mac php-api % sleep 1; ts2=$(date +%Y_%m_%d_%H%M%S)
+cat > database/migrations/${ts2}_create_posts_table.php <<'PHP'
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    public function up(): void
+    {
+        Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+            $table->string('title', 200);
+            $table->text('content');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+        });
+    }
+    public function down(): void
+    {
+        Schema::dropIfExists('posts');
+    }
+};
+PHP
+(base) sharanya@Mac php-api % php artisan migrate
+
+In Connection.php line 829:
+                                                                                                         
+  SQLSTATE[HY000] [1045] Access denied for user 'energex_user'@'localhost' (using password: YES) (Conne  
+  ction: mysql, SQL: select table_name as `name`, (data_length + index_length) as `size`, table_comment  
+   as `comment`, engine as `engine`, table_collation as `collation` from information_schema.tables wher  
+  e table_schema = 'energex_test' and table_type in ('BASE TABLE', 'SYSTEM VERSIONED') order by table_n  
+  ame)                                                                                                   
+                                                                                                         
+
+In Connector.php line 65:
+                                                                                                  
+  SQLSTATE[HY000] [1045] Access denied for user 'energex_user'@'localhost' (using password: YES)  
+                                                                                                  
+
+(base) sharanya@Mac php-api % mysql -u energex_user -p -h 127.0.0.1 -P 3306
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'energex_user'@'localhost' (using password: YES)
+(base) sharanya@Mac php-api % mysql -u energex_user -p -h 127.0.0.1 -P 3306
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'energex_user'@'localhost' (using password: YES)
+(base) sharanya@Mac php-api % mysql -u energex_user -p -h 127.0.0.1 -P 3306
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'energex_user'@'localhost' (using password: YES)
+(base) sharanya@Mac php-api % mysql -u energex_user -p -h 127.0.0.1 -P 3306
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'energex_user'@'localhost' (using password: YES)
+(base) sharanya@Mac php-api % mysql -u energex_user -p -h 127.0.0.1 -P 3306
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'energex_user'@'localhost' (using password: YES)
+(base) sharanya@Mac php-api % mysql -u energex_user -p -h 127.0.0.1 -P 3306
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 25
+Server version: 9.1.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES LIKE 'energex_test';
++-------------------------+
+| Database (energex_test) |
++-------------------------+
+| energex_test            |
++-------------------------+
+1 row in set (0.01 sec)
+
+mysql> USE energex_test;
+Database changed
+mysql> SHOW TABLES;
+Empty set (0.01 sec)
+
+mysql> EXIT;
+Bye
+(base) sharanya@Mac php-api % php artisan migrate
+
+   INFO  Preparing database.  
+
+  Creating migration table ................................................................... 36ms DONE
+
+   INFO  Running migrations.  
+
+  2025_09_03_201253_create_users_table ....................................................... 15ms DONE
+  2025_09_03_201454_create_posts_table ....................................................... 27ms DONE
+
+(base) sharanya@Mac php-api % mysql -u energex_user -p -h 127.0.0.1 -P 3306 -e "SHOW TABLES IN energex_test;"
+Enter password: 
++------------------------+
+| Tables_in_energex_test |
++------------------------+
+| migrations             |
+| posts                  |
+| users                  |
++------------------------+
+(base) sharanya@Mac php-api % mkdir -p app/Models
+(base) sharanya@Mac php-api % cat > app/Models/User.php <<'PHP'
+<?php
+namespace App\Models;
+
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model implements AuthenticatableContract
+{
+    use Authenticatable;
+
+    protected $fillable = ['name','email','password'];
+    protected $hidden = ['password'];
+}
+PHP
+(base) sharanya@Mac php-api % cat > app/Models/Post.php <<'PHP'
+<?php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Post extends Model
+{
+    protected $fillable = ['title','content','user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+}
+PHP
+(base) sharanya@Mac php-api % mkdir -p app/Http/ControllerS
+(base) sharanya@Mac php-api % >....                                                                       
+        ]);
+
+        $user = User::create([
+            'name' => $req->name,
+            'email' => $req->email,
+            'password' => Hash::make($req->password),
+        ]);
+
+        return response()->json([
+            'message' => 'Registered',
+            'user' => ['id'=>$user->id,'name'=>$user->name,'email'=>$user->email]
+        ], 201);
+    }
+
+    public function login(Request $req)
+    {
+        $this->validate($req, [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        $credentials = $req->only('email','password');
+
+        if (! $token = auth()->attempt($credentials)) {
+            return response()->json(['message' => 'Invalid credentials'], 401);
+        }
+
+        return response()->json(['token' => $token], 200);
+    }
+}
+PHP
+(base) sharanya@Mac php-api % >....                                                                       
+        if ($cached = $this->redis->get($key)) {
+            return response()->json(json_decode($cached, true));
+        }
+
+        $post = Post::find($id);
+        if (!$post) return response()->json(['message' => 'Not found'], 404);
+
+        $this->redis->set($key, $post->toJson());
+        return response()->json($post);
+    }
+
+    public function store(Request $req)
+    {
+        $this->validate($req, [
+            'title' => 'required|string|max:200',
+            'content' => 'required|string',
+        ]);
+
+        $userId = auth()->id();
+        $post = Post::create([
+            'title' => $req->title,
+            'content' => $req->content,
+            'user_id' => $userId,
+        ]);
+
+        // Invalidate list cache
+        $this->redis->del(['posts:all']);
+        return response()->json($post, 201);
+    }
+}
+PHP
+(base) sharanya@Mac php-api % nano bootstrap/app.php
+(base) sharanya@Mac php-api % cat > routes/web.php <<'PHP'
+<?php
+
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->post('register', 'AuthController@register');
+    $router->post('login',    'AuthController@login');
+
+    // Protected routes (JWT required)
+    $router->group(['middleware' => 'jwt.auth'], function () use ($router) {
+        $router->get('posts',        'PostController@index');   // cached
+        $router->get('posts/{id}',   'PostController@show');    // cached
+        $router->post('posts',       'PostController@store');   // invalidates list cache
+    });
+});
+PHP
+(base) sharanya@Mac php-api % mkdir -p app/Http/Middleware
+cat > app/Http/Middleware/CorsMiddleware.php <<'PHP'
+<?php
+namespace App\Http\Middleware;
+
+use Closure;
+
+class CorsMiddleware
+{
+    public function handle($request, Closure $next)
+    {
+        $response = $next($request);
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        $response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+        return $response;
+    }
+}
+PHP
+(base) sharanya@Mac php-api % nano bootstrap/app.php      
+(base) sharanya@Mac php-api % php -S localhost:8000 -t public
+[Wed Sep  3 20:51:26 2025] PHP 8.4.12 Development Server (http://localhost:8000) started
+[Wed Sep  3 20:55:50 2025] [::1]:55115 Accepted
+[Wed Sep  3 20:55:50 2025] [::1]:55116 Accepted
+[Wed Sep  3 20:55:50 2025] [::1]:55115 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Sep  3 20:55:50 2025] [::1]:55115 Closing
+[Wed Sep  3 20:55:51 2025] [::1]:55116 [500]: POST /api/register
+[Wed Sep  3 20:55:51 2025] [::1]:55116 Closing
+[Wed Sep  3 20:57:54 2025] [::1]:55131 Accepted
+[Wed Sep  3 20:57:54 2025] [::1]:55132 Accepted
+[Wed Sep  3 20:57:54 2025] [::1]:55131 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Sep  3 20:57:54 2025] [::1]:55131 Closing
+[Wed Sep  3 20:57:54 2025] [::1]:55132 [500]: POST /api/register
+[Wed Sep  3 20:57:54 2025] [::1]:55132 Closing
+^X
+^C%                                                                                                         (base) sharanya@Mac php-api % nano bootstrap/app.php
+(base) sharanya@Mac php-api % mkdir -p resources/lang/en
+cat > resources/lang/en/validation.php <<'PHP'
+<?php
+return [];
+PHP
+(base) sharanya@Mac php-api % php -S localhost:8000 -t public
+[Wed Sep  3 21:01:38 2025] PHP 8.4.12 Development Server (http://localhost:8000) started
+[Wed Sep  3 21:01:59 2025] [::1]:55156 Accepted
+[Wed Sep  3 21:01:59 2025] [::1]:55157 Accepted
+[Wed Sep  3 21:01:59 2025] [::1]:55156 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Sep  3 21:01:59 2025] [::1]:55156 Closing
+[Wed Sep  3 21:02:00 2025] [::1]:55157 [201]: POST /api/register
+[Wed Sep  3 21:02:00 2025] [::1]:55157 Closing
+[Wed Sep  3 21:04:37 2025] [::1]:55182 Accepted
+[Wed Sep  3 21:04:37 2025] [::1]:55183 Accepted
+[Wed Sep  3 21:04:37 2025] [::1]:55182 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Sep  3 21:04:37 2025] [::1]:55182 Closing
+[Wed Sep  3 21:04:38 2025] [::1]:55183 [500]: POST /api/login
+[Wed Sep  3 21:04:38 2025] [::1]:55183 Closing
+^C%                                                                                                         (base) sharanya@Mac php-api % nano app/Models/User.php
+(base) sharanya@Mac php-api % nano app/Models/User.php
+(base) sharanya@Mac php-api % nano bootstrap/app.php
+(base) sharanya@Mac php-api % php -S localhost:8000 -t public
+[Wed Sep  3 21:10:46 2025] PHP 8.4.12 Development Server (http://localhost:8000) started
+[Wed Sep  3 21:11:21 2025] [::1]:55255 Accepted
+[Wed Sep  3 21:11:21 2025] [::1]:55255 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Sep  3 21:11:21 2025] [::1]:55255 Closing
+[Wed Sep  3 21:11:21 2025] [::1]:55256 Accepted
+[Wed Sep  3 21:11:21 2025] [::1]:55256 [200]: POST /api/login
+[Wed Sep  3 21:11:21 2025] [::1]:55256 Closing
+[Wed Sep  3 21:13:14 2025] [::1]:55301 Accepted
+[Wed Sep  3 21:13:14 2025] [::1]:55301 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Sep  3 21:13:14 2025] [::1]:55301 Closing
+[Wed Sep  3 21:13:14 2025] [::1]:55302 Accepted
+[Wed Sep  3 21:13:15 2025] [::1]:55302 [401]: GET /api/posts
+[Wed Sep  3 21:13:15 2025] [::1]:55302 Closing
+[Wed Sep  3 21:14:59 2025] [::1]:55351 Accepted
+[Wed Sep  3 21:14:59 2025] [::1]:55352 Accepted
+[Wed Sep  3 21:14:59 2025] [::1]:55351 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Sep  3 21:14:59 2025] [::1]:55351 Closing
+[Wed Sep  3 21:14:59 2025] [::1]:55352 [200]: GET /api/posts
+[Wed Sep  3 21:14:59 2025] [::1]:55352 Closing
+[Wed Sep  3 21:17:41 2025] [::1]:55424 Accepted
+[Wed Sep  3 21:17:41 2025] [::1]:55425 Accepted
+[Wed Sep  3 21:17:41 2025] [::1]:55424 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Sep  3 21:17:41 2025] [::1]:55424 Closing
+[Wed Sep  3 21:17:41 2025] [::1]:55425 [201]: POST /api/posts
+[Wed Sep  3 21:17:41 2025] [::1]:55425 Closing
+[Wed Sep  3 21:21:18 2025] [::1]:55509 Accepted
+[Wed Sep  3 21:21:18 2025] [::1]:55510 Accepted
+[Wed Sep  3 21:21:18 2025] [::1]:55509 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Sep  3 21:21:18 2025] [::1]:55509 Closing
+[Wed Sep  3 21:21:18 2025] [::1]:55510 [200]: GET /api/posts
+[Wed Sep  3 21:21:18 2025] [::1]:55510 Closing
+[Wed Sep  3 21:21:22 2025] [::1]:55518 Accepted
+[Wed Sep  3 21:21:22 2025] [::1]:55518 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Sep  3 21:21:22 2025] [::1]:55518 Closing
+[Wed Sep  3 21:21:22 2025] [::1]:55519 Accepted
+[Wed Sep  3 21:21:22 2025] [::1]:55519 [200]: GET /api/posts
+[Wed Sep  3 21:21:22 2025] [::1]:55519 Closing
+[Wed Sep  3 21:23:33 2025] [::1]:55577 Accepted
+[Wed Sep  3 21:23:33 2025] [::1]:55578 Accepted
+[Wed Sep  3 21:23:33 2025] [::1]:55577 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Sep  3 21:23:33 2025] [::1]:55577 Closing
+[Wed Sep  3 21:23:33 2025] [::1]:55578 [401]: GET /api/posts/1
+[Wed Sep  3 21:23:33 2025] [::1]:55578 Closing
+[Wed Sep  3 21:23:34 2025] [::1]:55581 Accepted
+[Wed Sep  3 21:23:34 2025] [::1]:55581 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Sep  3 21:23:34 2025] [::1]:55581 Closing
+[Wed Sep  3 21:23:34 2025] [::1]:55582 Accepted
+[Wed Sep  3 21:23:34 2025] [::1]:55582 [401]: GET /api/posts/1
+[Wed Sep  3 21:23:34 2025] [::1]:55582 Closing
+[Wed Sep  3 21:23:42 2025] [::1]:55588 Accepted
+[Wed Sep  3 21:23:42 2025] [::1]:55588 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Sep  3 21:23:42 2025] [::1]:55588 Closing
+[Wed Sep  3 21:23:42 2025] [::1]:55589 Accepted
+[Wed Sep  3 21:23:42 2025] [::1]:55589 [200]: GET /api/posts/1
+[Wed Sep  3 21:23:42 2025] [::1]:55589 Closing
+[Wed Sep  3 21:23:43 2025] [::1]:55595 Accepted
+[Wed Sep  3 21:23:43 2025] [::1]:55595 Closed without sending a request; it was probably just an unused speculative preconnection
+[Wed Sep  3 21:23:43 2025] [::1]:55595 Closing
+[Wed Sep  3 21:23:43 2025] [::1]:55596 Accepted
+[Wed Sep  3 21:23:43 2025] [::1]:55596 [200]: GET /api/posts/1
+[Wed Sep  3 21:23:43 2025] [::1]:55596 Closing
+

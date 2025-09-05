@@ -1,0 +1,64 @@
+Last login: Wed Sep  3 22:37:10 on ttys004
+eval "$(/opt/homebrew/bin/brew shellenv)"
+(base) sharanya@Mac ~ % redis-cli keys 'posts*'
+1) "posts:1"
+2) "posts:all"
+(base) sharanya@Mac ~ % redis-cli DEL posts:all posts:1
+(integer) 2
+(base) sharanya@Mac ~ % curl -i http://localhost:4000/cache/posts | head -n 20
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   191  100   191    0     0   1428      0 --:--:-- --:--:-- --:--:--  1436
+HTTP/1.1 200 OK
+X-Powered-By: Express
+X-Cache: MISS
+Content-Type: application/json; charset=utf-8
+Content-Length: 191
+ETag: W/"bf-1ebPbcgcE2iCOQ6S4p7RTjVNrPo"
+Date: Thu, 04 Sep 2025 02:43:20 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+[{"id":1,"title":"EnergeX - Backend Testing","content":"Did Sharanya make it? She obviously does","user_id":1,"created_at":"2025-09-04T01:17:41.000Z","updated_at":"2025-09-04T01:17:41.000Z"}]%                                                (base) sharanya@Mac ~ % curl -i http://localhost:4000/cache/posts | head -n 20
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   191  100   191    0     0  28009      0 --:--:-- --:--:-- --:--:-- 31833
+HTTP/1.1 200 OK
+X-Powered-By: Express
+X-Cache: HIT
+Content-Type: application/json; charset=utf-8
+Content-Length: 191
+ETag: W/"bf-1ebPbcgcE2iCOQ6S4p7RTjVNrPo"
+Date: Thu, 04 Sep 2025 02:43:33 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+[{"id":1,"title":"EnergeX - Backend Testing","content":"Did Sharanya make it? She obviously does","user_id":1,"created_at":"2025-09-04T01:17:41.000Z","updated_at":"2025-09-04T01:17:41.000Z"}]%                                                (base) sharanya@Mac ~ % curl -i http://localhost:4000/cache/posts/1 | head -n 20
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   189  100   189    0     0  11636      0 --:--:-- --:--:-- --:--:-- 11812
+HTTP/1.1 200 OK
+X-Powered-By: Express
+X-Cache: MISS
+Content-Type: application/json; charset=utf-8
+Content-Length: 189
+ETag: W/"bd-YcbxMKxMCMA61HRt/ye8V8dJm9A"
+Date: Thu, 04 Sep 2025 02:43:44 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":1,"title":"EnergeX - Backend Testing","content":"Did Sharanya make it? She obviously does","user_id":1,"created_at":"2025-09-04T01:17:41.000Z","updated_at":"2025-09-04T01:17:41.000Z"}%                                                  (base) sharanya@Mac ~ % curl -i http://localhost:4000/cache/posts/1 | head -n 20
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   189  100   189    0     0  27921      0 --:--:-- --:--:-- --:--:-- 31500
+HTTP/1.1 200 OK
+X-Powered-By: Express
+X-Cache: HIT
+Content-Type: application/json; charset=utf-8
+Content-Length: 189
+ETag: W/"bd-YcbxMKxMCMA61HRt/ye8V8dJm9A"
+Date: Thu, 04 Sep 2025 02:44:00 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":1,"title":"EnergeX - Backend Testing","content":"Did Sharanya make it? She obviously does","user_id":1,"created_at":"2025-09-04T01:17:41.000Z","updated_at":"2025-09-04T01:17:41.000Z"}%                                                  (base) sharanya@Mac ~ % 
