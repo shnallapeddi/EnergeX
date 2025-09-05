@@ -1,0 +1,224 @@
+Last login: Wed Sep  3 21:26:41 on ttys002
+eval "$(/opt/homebrew/bin/brew shellenv)"
+(base) sharanya@Mac ~ % cd ~
+(base) sharanya@Mac ~ % mkdir -p energex/node-cache && cd energex/node-cache
+(base) sharanya@Mac node-cache % npm init -y
+Wrote to /Users/sharanya/energex/node-cache/package.json:
+
+{
+  "name": "cache",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
+
+
+
+(base) sharanya@Mac node-cache % npm i express mysql2 redis dotenv
+
+added 88 packages, and audited 89 packages in 3s
+
+18 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+(base) sharanya@Mac node-cache % npm i -D typescript ts-node-dev @types/node @types/express
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+
+added 71 packages, and audited 160 packages in 6s
+
+26 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+(base) sharanya@Mac node-cache % npx tsc --init
+
+Created a new tsconfig.json                                                     
+                                                                             TS 
+You can learn more at https://aka.ms/tsconfig
+(base) sharanya@Mac node-cache % nano tsconfig.json
+(base) sharanya@Mac node-cache % ls package.json 
+package.json
+(base) sharanya@Mac node-cache % node -e "let p=require('./package.json'); p.scripts={dev:'ts-node-dev --respawn --transpile-only src/server.ts', build:'tsc', start:'node dist/server.js'}; require('fs').writeFileSync('package.json', JSON.stringify(p,null,2));"
+(base) sharanya@Mac node-cache % cat package.json | sed -n '1,60p'
+{
+  "name": "cache",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.4",
+    "redis": "^5.8.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.2"
+  }
+}%                                                                              (base) sharanya@Mac node-cache % cat > .env <<'ENV'               
+PORT=4000
+
+REDIS_URL=redis://127.0.0.1:6379
+CACHE_TTL=120
+
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_NAME=energex_test
+DB_USER=energex_user
+DB_PASS=EnergeX!Local123
+ENV
+(base) sharanya@Mac node-cache % mkdir -p src
+(base) sharanya@Mac node-cache % cat > src/db.ts <<'TS'
+import mysql from 'mysql2/promise';
+
+export const pool = mysql.createPool({
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT || 3306),
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  waitForConnections: true,
+  connectionLimit: 10
+});
+
+export type PostRow = {
+  id: number;
+  title: string;
+  content: string;
+  user_id: number | null;
+  created_at: string;
+  updated_at: string;
+};
+TS
+(base) sharanya@Mac node-cache % cat > src/redis.ts <<'TS'
+import { createClient } from 'redis';
+
+export const redis = createClient({
+  url: process.env.REDIS_URL || 'redis://127.0.0.1:6379'
+});
+
+redis.on('error', (err) => console.error('Redis error:', err));
+TS
+(base) sharanya@Mac node-cache % cat > src/redis.ts <<'TS'                     
+import { createClient } from 'redis';
+
+export const redis = createClient({  
+  url: process.env.REDIS_URL || 'redis://127.0.0.1:6379'          
+}); 
+
+redis.on('error', (err) => console.error('Redis error:', err));
+TS    
+(base) sharanya@Mac node-cache % npm run dev
+
+> cache@1.0.0 dev
+> ts-node-dev --respawn --transpile-only src/server.ts
+
+/Users/sharanya/energex/node-cache/node_modules/resolve/lib/sync.js:113
+    throw err;
+    ^
+
+Error: Cannot find module 'src/server.ts' from '/Users/sharanya/energex/node-cache'
+    at Function.resolveSync [as sync] (/Users/sharanya/energex/node-cache/node_modules/resolve/lib/sync.js:111:15)
+    at resolveRequest (/Users/sharanya/energex/node-cache/node_modules/ts-node-dev/lib/resolveMain.js:18:24)
+    at exports.resolveMain (/Users/sharanya/energex/node-cache/node_modules/ts-node-dev/lib/resolveMain.js:30:20)
+    at exports.runDev (/Users/sharanya/energex/node-cache/node_modules/ts-node-dev/lib/index.js:53:30)
+    at Object.<anonymous> (/Users/sharanya/energex/node-cache/node_modules/ts-node-dev/lib/bin.js:136:4)
+    at Module._compile (node:internal/modules/cjs/loader:1554:14)
+    at Object..js (node:internal/modules/cjs/loader:1706:10)
+    at Module.load (node:internal/modules/cjs/loader:1289:32)
+    at Function._load (node:internal/modules/cjs/loader:1108:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14) {
+  code: 'MODULE_NOT_FOUND'
+}
+
+Node.js v22.14.0
+(base) sharanya@Mac node-cache % pwd
+/Users/sharanya/energex/node-cache
+(base) sharanya@Mac node-cache % ls -la
+total 160
+drwxr-xr-x    8 sharanya  staff    256 Sep  3 22:25 .
+drwxr-xr-x    3 sharanya  staff     96 Sep  3 22:11 ..
+-rw-r--r--    1 sharanya  staff    157 Sep  3 22:24 .env
+drwxr-xr-x  139 sharanya  staff   4448 Sep  3 22:11 node_modules
+-rw-r--r--    1 sharanya  staff  68576 Sep  3 22:11 package-lock.json
+-rw-r--r--    1 sharanya  staff    550 Sep  3 22:21 package.json
+drwxr-xr-x    4 sharanya  staff    128 Sep  3 22:26 src
+-rw-r--r--    1 sharanya  staff    288 Sep  3 22:19 tsconfig.json
+(base) sharanya@Mac node-cache % ls -la src
+total 16
+drwxr-xr-x  4 sharanya  staff  128 Sep  3 22:26 .
+drwxr-xr-x  8 sharanya  staff  256 Sep  3 22:25 ..
+-rw-r--r--  1 sharanya  staff  447 Sep  3 22:25 db.ts
+-rw-r--r--  1 sharanya  staff  201 Sep  3 22:27 redis.ts
+(base) sharanya@Mac node-cache % nano src/server.ts
+(base) sharanya@Mac node-cache % npm run dev              
+
+> cache@1.0.0 dev
+> ts-node-dev --respawn --transpile-only src/server.ts
+
+[INFO] 22:32:11 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 5.9.2)
+/Users/sharanya/energex/node-cache/node_modules/ts-node/src/index.ts:859
+    return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+           ^
+TSError: ⨯ Unable to compile TypeScript:
+tsconfig.json(1,1): error TS1005: '{' expected.
+
+    at createTSError (/Users/sharanya/energex/node-cache/node_modules/ts-node/src/index.ts:859:12)
+    at reportTSError (/Users/sharanya/energex/node-cache/node_modules/ts-node/src/index.ts:863:19)
+    at createFromPreloadedConfig (/Users/sharanya/energex/node-cache/node_modules/ts-node/src/index.ts:874:36)
+    at create (/Users/sharanya/energex/node-cache/node_modules/ts-node/src/index.ts:624:10)
+    at Object.register (/Users/sharanya/energex/node-cache/node_modules/ts-node/src/index.ts:591:15)
+    at registerTsNode (/Users/sharanya/energex/node-cache/node_modules/ts-node-dev/lib/compiler.js:174:16)
+    at Object.init (/Users/sharanya/energex/node-cache/node_modules/ts-node-dev/lib/compiler.js:121:9)
+    at Object.exports.runDev (/Users/sharanya/energex/node-cache/node_modules/ts-node-dev/lib/index.js:256:14)
+    at Object.<anonymous> (/Users/sharanya/energex/node-cache/node_modules/ts-node-dev/lib/bin.js:136:4)
+    at Module._compile (node:internal/modules/cjs/loader:1554:14) {
+  diagnosticCodes: [ 1005 ]
+}
+(base) sharanya@Mac node-cache % mv tsconfig.json tsconfig.bak 2>/dev/null || true
+
+cat > tsconfig.json <<'JSON'
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "rootDir": "src",
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"]
+}
+JSON
+
+(base) sharanya@Mac node-cache % node -e "JSON.parse(require('fs').readFileSync('tsconfig.json','utf8')); console.log('tsconfig ok ')"  
+tsconfig ok 
+(base) sharanya@Mac node-cache % npm run dev
+
+> cache@1.0.0 dev
+> ts-node-dev --respawn --transpile-only src/server.ts
+
+[INFO] 22:34:29 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 5.9.2)
+Node cache API listening on http://localhost:4000
+
