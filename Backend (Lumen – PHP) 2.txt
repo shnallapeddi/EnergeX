@@ -1,0 +1,24 @@
+Last login: Wed Sep  3 21:24:57 on ttys002
+eval "$(/opt/homebrew/bin/brew shellenv)"
+(base) sharanya@Mac ~ % mkdir -p ~/code/energex && cd ~/code/energex
+(base) sharanya@Mac energex % cd php-api
+(base) sharanya@Mac php-api % redis-cli keys 'posts*'
+1) "posts:1"
+2) "posts:all"
+(base) sharanya@Mac php-api % redis-cli TYPE posts:all
+string
+(base) sharanya@Mac php-api % redis-cli STRLEN posts:all
+(integer) 197
+(base) sharanya@Mac php-api % redis-cli TTL posts:all
+(integer) -1
+(base) sharanya@Mac php-api % 
+
+
+
+
+
+
+
+
+
+
