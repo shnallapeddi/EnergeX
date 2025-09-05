@@ -23,7 +23,7 @@ Build a microservice API using Lumen (PHP) and Node.js (TypeScript) that integra
 The Lumen API owns authentication and post creation.
 The Node cache serves reads for posts via Redis; on a MISS it queries MySQL, then caches the result.
 
-#### Endpoints
+#### Backend
 ##### Lumen (PHP) API
 | Method | Endpoint          | Auth | Description                           |
 | -----: | ----------------- | :--: | ------------------------------------- |
@@ -42,8 +42,53 @@ The PHP API focuses on auth and writes. Reads can go through the cache service b
 |    GET | `/cache/posts`     | Posts from Redis; on MISS, query DB then cache |
 |    GET | `/cache/posts/:id` | One post from Redis; on MISS, query then cache |
 
-### File Paths
+#### Backend Implementation
+##### (Lumen – PHP)
+A Lumen microservice that exposes a small REST API for authentication and posts.
+JWT auth: /api/login issues a signed token; protected routes use a JWT middleware.
+User registration: /api/register validates input and stores a bcrypt-hashed password in MySQL.
+Posts CRUD (create + read):
+POST /api/posts creates a post for the authenticated user.
+GET /api/posts and GET /api/posts/{id} first check Redis (keys posts:all and posts:{id}) and fall back to MySQL on a miss; results are cached with a TTL.
+Proper HTTP status codes and JSON error messages throughout; simple cache warm/refresh on create.
+A Postman collection is included to exercise register, login, and posts endpoints.
 
+##### Backend (Node.js – TypeScript)
+This section is the Node.js (TypeScript) cache service we built to sit in front of MySQL and speed up reads:
+A small Express app that connects to Redis and MySQL (mysql2/promise).
+Endpoints:
+GET /cache/posts – returns the list of posts.
+Looks up key posts:all in Redis → HIT: return cached JSON (sets X-Cache: HIT).
+MISS: reads rows from MySQL, stores them in Redis with a TTL, returns JSON (sets X-Cache: MISS).
+GET /cache/posts/:id – returns a single post.
+Checks posts:{id} in Redis first; on miss, queries MySQL, caches the row, then returns it.
+
+##### Database
+Schema: We created a MySQL database with two tables:
+users (id, name, email UNIQUE, password, created_at, updated_at)
+posts (id, title, content, user_id FK → users.id, created_at, updated_at, index on user_id, ON DELETE SET NULL)
+Bootstrap scripts: The repo contains container-init SQL:
+mysql/init/01-schema.sql — creates the tables with utf8mb4 + InnoDB and the FK.
+mysql/init/02-seed.sql — inserts a sample user and post so the app can start with data.
+Passwords: When a user registers through the Lumen API, the password is hashed (bcrypt) before being stored.
+Consumers: Both backends use this DB:
+Lumen performs CRUD and issues JWTs.
+The Node cache reads posts (and writes them into Redis on a cache miss).
+Docker: MySQL is run via Docker Compose with health checks; credentials and DB name are provided through env vars used by Lumen and the Node cache.
+
+##### Frontend
+Stack: React (Vite + TypeScript). One-page app in src/App.tsx with a tiny Axios wrapper in src/lib/api.ts.
+Auth flows:
+Register form posts to POST /api/register (name, email, password).
+Login form posts to POST /api/login; the returned JWT is kept in state (and sent on subsequent calls via Authorization: Bearer <token>).
+Posts UI:
+After login, it calls GET /api/posts to show the list.
+Provides a simple create post form that submits to POST /api/posts (title, content).
+Status & UX: success/error banners, disabled/hidden sections when not authenticated, centered clean layout.
+Proxy/wiring: Vite dev server proxies /api/* to the Lumen backend on :8000, so the frontend calls /api/... without CORS issues.
+For cache testing you can switch the list call to http://localhost:4000/cache/posts to hit the Node Redis layer directly.
+
+### File Paths
 | Section (task)                 | Path(s)                                                                                               | What it contains                                                                                                 |
 |--------------------------------|--------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
 | **Backend (Lumen – PHP)**      | `php-api/`                                                                                             | Lumen app code (`app/`, `routes/`, `public/`), `.env*`, `phpunit.xml`, **Dockerfile**, PHPUnit tests under `tests/` |
@@ -56,7 +101,6 @@ The PHP API focuses on auth and writes. Reads can go through the cache service b
 | **Postman collection**         | `Screening Test – EnergeX – Backend.postman_collection.json`                                           | Ready-to-import Postman requests for Register/Login/Posts                                                        |
 
 ### Repository tree
-
 ```text
 ~/code/energex
 ├─ docker-compose.yml
