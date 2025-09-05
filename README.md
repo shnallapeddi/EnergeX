@@ -5,7 +5,7 @@ Full-Stack Developer Technical Assessment
 #### Objective
 Build a microservice API using Lumen (PHP) and Node.js (TypeScript) that integrates with Redis for caching, a MySQL database, and a simple frontend (React.js or Vue.js) to consume the API.
 
-#### Assessment Breakdown
+### Assessment Breakdown
 1. Backend (Lumen)	Build a RESTful API using Lumen with JWT authentication	
 2. Backend (Node.js)	Create a caching layer with Redis for fast API responses
 3. Database (MySQL)	Store and retrieve user and post data in MySQL
@@ -14,7 +14,7 @@ Build a microservice API using Lumen (PHP) and Node.js (TypeScript) that integra
 6. DevOps (Docker)	Containerize the application using Docker
 7. CI/CD	Set up GitHub Actions/GitLab CI to automate testing
 
-#### Repository tree
+### Repository tree
 ~/code/energex
 ├─ docker-compose.yml
 ├─ mysql/
@@ -32,16 +32,19 @@ Build a microservice API using Lumen (PHP) and Node.js (TypeScript) that integra
 ├─ php-api/
 │  ├─ Dockerfile
 │  ├─ .env.docker
-│  ├─ app/ … routes/ … public/
+│  ├─ app/        # Lumen application code
+│  ├─ routes/
+│  ├─ public/
 │  └─ tests/
 │     ├─ TestCase.php
 │     └─ Feature/
 │        ├─ AuthTest.php
 │        └─ PostsTest.php
-├─ src/  (React frontend)
+├─ src/           # React (Vite) frontend
 └─ Screening Test - EnergeX - Backend.postman_collection.json
 
-##### File Paths
+
+### File Paths
 | Section (task)             | Path(s)                                                      | What it contains                                                                 |
 | -------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------- |
 | **Backend (Lumen – PHP)**  | `php-api/` - Backend (Lumen – PHP) 1.txt, Backend (Lumen – PHP) 2.txt, EnergeX.sql                                                 | Lumen code (routes, controllers, models), `.env*`, `phpunit.xml`, **Dockerfile** |
