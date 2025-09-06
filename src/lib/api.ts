@@ -1,8 +1,11 @@
 import axios from 'axios';
 
+const RAW = (import.meta.env.VITE_API_BASE || '').trim();
+const BASE = RAW ? RAW.replace(/\/$/, '') + '/api' : '/api';
+
 const api = axios.create({
-  // requests to /api/* are going to be forwarded to http://localhost:8000
-  baseURL: '/',
+  baseURL: BASE,
+  headers: { Accept: 'application/json' },
 });
 
 export function setAuthToken(token?: string) {
@@ -19,4 +22,3 @@ const saved = localStorage.getItem('token');
 if (saved) setAuthToken(saved);
 
 export default api;
-
