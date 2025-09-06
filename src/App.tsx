@@ -116,7 +116,7 @@ export default function App() {
   return (
     <div className="page">
       <header className="header">
-        <h1>EnergeX — Frontend</h1>
+        <h1>EnergeX — AI</h1>
         <p>Register · Login · View posts (from your Lumen API)</p>
         {status && <div className={`status ${status.kind}`}>{status.message}</div>}
       </header>
