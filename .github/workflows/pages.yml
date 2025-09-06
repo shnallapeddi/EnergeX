@@ -31,7 +31,7 @@ jobs:
           node-version: 20
       - run: npm ci
       - run: npm run build
-      # SPA fixes for GitHub Pages
+      # SPA + Pages fixes
       - run: cp dist/index.html dist/404.html
       - run: touch dist/.nojekyll
       - uses: actions/upload-pages-artifact@v3
