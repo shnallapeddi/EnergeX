@@ -108,7 +108,6 @@ if ($app->runningInConsole()) {
     );
     
     $app->register(App\Console\Commands\ServeCommand::class);
-    $app->loadDeferredProviders();
     $app->make(Illuminate\Contracts\Console\Kernel::class)->registerCommand(
         $app->make(App\Console\Commands\ServeCommand::class)
     );
