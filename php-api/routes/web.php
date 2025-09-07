@@ -1,14 +1,15 @@
 <?php
 
-// Group under /api
-$router->group(['prefix' => 'api'], function () use ($router) {
-    // Preflight for each endpoint
-    $router->options('register', function () { return response('', 204); });
-    $router->options('login',    function () { return response('', 204); });
-    $router->options('posts',    function () { return response('', 204); });
-    $router->options('posts/{id}', function () { return response('', 204); });
+$router->options('/{any:.*}', function () {
+    return response('', 204, [
+        'Access-Control-Allow-Origin'  => '*',
+        'Access-Control-Allow-Methods' => 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers' => 'Content-Type, Authorization, X-Requested-With',
+        'Access-Control-Max-Age'       => '86400',
+    ]);
+});
 
-    // Actual endpoints
+$router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('register', 'AuthController@register');
     $router->post('login',    'AuthController@login');
 
