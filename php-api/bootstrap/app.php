@@ -1,7 +1,6 @@
 <?php
 
 require_once __DIR__.'/../vendor/autoload.php';
-use App\Console\Commands\ServeCommand;
 
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
     dirname(__DIR__)
@@ -100,12 +99,5 @@ $app->router->group([
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
 });
-if ($app->runningInConsole()) {
-    $app->singleton(
-        Illuminate\Contracts\Console\Kernel::class,
-        App\Console\Kernel::class
-    );
 
-    $app->register(App\Console\Commands\ServeCommand::class);
-}
 return $app;
