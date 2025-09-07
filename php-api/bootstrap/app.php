@@ -100,4 +100,17 @@ $app->router->group([
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
 });
+
+if ($app->runningInConsole()) {
+    $app->singleton(
+        Illuminate\Contracts\Console\Kernel::class,
+        App\Console\Kernel::class
+    );
+    
+    $app->register(App\Console\Commands\ServeCommand::class);
+    $app->loadDeferredProviders();
+    $app->make(Illuminate\Contracts\Console\Kernel::class)->registerCommand(
+        $app->make(App\Console\Commands\ServeCommand::class)
+    );
+}
 return $app;
