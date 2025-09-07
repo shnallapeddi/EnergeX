@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__.'/../vendor/autoload.php';
+use App\Console\Commands\ServeCommand;
 
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
     dirname(__DIR__)
@@ -92,6 +93,10 @@ $app->register(PHPOpenSourceSaver\JWTAuth\Providers\LumenServiceProvider::class)
 | Load The Application Routes
 |--------------------------------------------------------------------------
 */
+$app->configure('app');
+
+$app->register(App\Console\Commands\ServeCommand::class);
+
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
