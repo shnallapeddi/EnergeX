@@ -17,6 +17,10 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
+$app->middleware([
+    App\Http\Middleware\CorsMiddleware::class,
+]);
+
 /**
  * Enable Facades and Eloquent ORM
  */
@@ -59,10 +63,6 @@ $app->configure('auth');   // <-- needed for JWT guard/provider
 | You'll use 'jwt.auth' to protect routes that require a valid token.
 |
 */
-
-$app->middleware([
-    App\Http\Middleware\CorsMiddleware::class,
-]);
 
 
 $app->routeMiddleware([
