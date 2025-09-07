@@ -84,7 +84,7 @@ export default function App() {
     if (!token) return;
     // If you ever want to hit the Node cache instead:
     // const { data } = await api.get<Post[]>("http://localhost:4000/cache/posts");
-    const { data } = await api.get<Post[]>("/api/posts", {
+    const { data } = await api.get<Post[]>("/posts", {
       headers: { Authorization: `Bearer ${token}` },
     });
     setPosts(data);
