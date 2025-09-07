@@ -29,15 +29,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm ci
-      - run: npm run build
       - name: Create .env.production
         run: |
-          echo "VITE_API_BASE=${{ vars.VITE_API_BASE }}" > .env.production
+          printf "VITE_API_BASE=%s\n" "${{ vars.VITE_API_BASE }}" > .env.production
+          echo "Using VITE_API_BASE=$(cat .env.production)"
+      - run: npm ci
+      - run: npm run build
 
-      # SPA + Pages fixes
       - run: cp dist/index.html dist/404.html
       - run: touch dist/.nojekyll
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
