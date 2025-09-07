@@ -100,6 +100,4 @@ $app->router->group([
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
 });
-
-$app->register(App\Console\Commands\ServeCommand::class);
 return $app;
