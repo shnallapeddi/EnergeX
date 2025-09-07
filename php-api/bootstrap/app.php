@@ -95,12 +95,11 @@ $app->register(PHPOpenSourceSaver\JWTAuth\Providers\LumenServiceProvider::class)
 */
 $app->configure('app');
 
-$app->register(App\Console\Commands\ServeCommand::class);
-
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
 });
 
+$app->register(App\Console\Commands\ServeCommand::class);
 return $app;
