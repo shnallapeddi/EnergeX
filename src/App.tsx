@@ -48,7 +48,7 @@ export default function App() {
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault();
     try {
-      await api.post("/api/register", {
+      await api.post("/register", {
         name,
         email: regEmail,
         password: regPassword,
@@ -63,7 +63,7 @@ export default function App() {
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     try {
-      const { data } = await api.post("/api/login", { email, password });
+      const { data } = await api.post("/login", { email, password });
       setToken(data.token);
       localStorage.setItem("token", data.token);   // persist
       setStatus({ kind: "success", message: "Logged in" });
@@ -98,7 +98,7 @@ export default function App() {
     try {
       setCreating(true);
       await api.post(
-        "/api/posts",
+        "/posts",
         { title, content },
         { headers: { Authorization: `Bearer ${token}` } }
       );
