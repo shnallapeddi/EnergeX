@@ -10,4 +10,10 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('posts/{id}',   'PostController@show');    // cached
         $router->post('posts',       'PostController@store');   // invalidates list cache
     });
+
+    // Handle CORS preflight requests
+    $router->options('/{any:.*}', function () {
+        return response('', 204);
+    });
+
 });
